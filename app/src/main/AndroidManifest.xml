@@ -27,7 +27,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".app.IMApplication"
         android:theme="@style/AppTheme">
+
         <activity android:name=".activity.LoginActivity"
             android:theme="@style/AppTheme.FullScreen"/>
         <activity android:name=".MainActivity"/>
@@ -42,7 +44,7 @@
         </activity>
 
         <!-- 设置环信应用的AppKey -->
-        <meta-data android:name="Tini_APPKEY"  android:value="1115200622203460#tini" />
+        <meta-data android:name="EASEMOB_APPKEY"  android:value="1115200622203460#tini" />
         <!-- 声明SDK所需的service SDK核心功能-->
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
         <service android:name="com.hyphenate.chat.EMChatService"
