@@ -2,7 +2,9 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-
+    viewBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "edu.glut.tini"
         minSdkVersion 24
@@ -40,4 +42,5 @@ dependencies {
     compile 'com.github.yalantis:jellytoolbar:v1.0'
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+    compile 'com.steelkiwi:sliding-square-loader-view:1.0.0' /*进度条*/
 }
