@@ -9,8 +9,6 @@ import android.view.WindowManager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gyf.barlibrary.ImmersionBar;
-
 
 /**
  * 所有的Activity都必须继承这个类并重写getLayoutResourceId()方法。
