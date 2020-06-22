@@ -1,9 +1,15 @@
 package edu.glut.tini.activity;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.gyf.barlibrary.ImmersionBar;
 
 
 /**
