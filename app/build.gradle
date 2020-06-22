@@ -40,5 +40,4 @@ dependencies {
     compile 'com.github.yalantis:jellytoolbar:v1.0'
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-
 }
