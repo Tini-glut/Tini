@@ -22,7 +22,6 @@ public class SplashPresenter implements SplashContract.Presenter {
 
     //是否登录到服务器
     private boolean isLoggedIn() {
-        return EMClient.getInstance().isConnected()
-                && EMClient.getInstance().isLoggedInBefore();
+        return EMClient.getInstance().isLoggedInBefore();
     }
 }
