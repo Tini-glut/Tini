@@ -1,16 +1,11 @@
 package edu.glut.tini.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import com.steelkiwi.library.SlidingSquareLoaderView;
 
 import edu.glut.tini.MainActivity;
 import edu.glut.tini.R;
@@ -24,7 +19,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     private EditText username;
     private EditText password;
     private Button loginBtn;
-    private SlidingSquareLoaderView loaderView;
+    private ProgressBar loaderView;
     private LoginPresenter loginPresenter = new LoginPresenter(this);
 
     @Override
@@ -37,10 +32,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         loginBtn.setOnClickListener(this::login);
     }
 
-    private boolean login(View view) {
+    private void login(View view) {
         loginPresenter.login(username.getText().toString().trim(),
                 password.getText().toString().trim());
-        return true;
     }
 
     @Override
@@ -62,13 +56,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public boolean onStartLogin() {
-        loaderView.show();
+        loaderView.setVisibility(View.VISIBLE);
         return true;
     }
 
     @Override
     public boolean onLoginSuccess() {
-        loaderView.hide();
+        loaderView.setVisibility(View.INVISIBLE);
         startActivity(new Intent(this, MainActivity.class));
         finish();
         return true;
@@ -76,7 +70,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public boolean onLoginFailed() {
-        loaderView.hide();
+        loaderView.setVisibility(View.INVISIBLE);
         Toast.makeText(this,getString(R.string.login_fail),Toast.LENGTH_LONG).show();
         return true;
     }
