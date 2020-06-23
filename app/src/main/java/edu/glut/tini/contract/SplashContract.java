@@ -2,6 +2,9 @@ package edu.glut.tini.contract;
 
 import edu.glut.tini.presenter.BasePresenter;
 
+/**
+ * 启动界面MVP协议
+ * */
 public interface SplashContract {
 
     /**

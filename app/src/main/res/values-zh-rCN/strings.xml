@@ -8,4 +8,8 @@
     <string name="username_error">用户名不合法</string>
     <string name="password_error">密码不合法</string>
     <string name="login_fail">登录失败</string>
+    <string name="PERMISSION_DENIED">权限被拒绝</string>
+    <string name="text_label_message" >消息</string>
+    <string name="text_label_friends" >联系人</string>
+    <string name="text_label_account" >我</string>
 </resources>
