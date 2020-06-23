@@ -1,10 +1,10 @@
-package edu.glut.tini.activity;
+package edu.glut.tini.ui.activity;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 
-import edu.glut.tini.MainActivity;
+import edu.glut.tini.ui.MainActivity;
 import edu.glut.tini.R;
 import edu.glut.tini.contract.SplashContract;
 import edu.glut.tini.presenter.SplashPresenter;

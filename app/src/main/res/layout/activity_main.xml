@@ -5,16 +5,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
     <FrameLayout
+        android:id="@+id/home_body"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
     </FrameLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/tab_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/icons"

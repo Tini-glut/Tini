@@ -1,7 +1,6 @@
-package edu.glut.tini.activity;
+package edu.glut.tini.ui.activity;
 
         import android.Manifest;
-        import android.app.ActivityManager;
         import android.content.Intent;
         import android.content.pm.PackageManager;
         import android.view.View;
@@ -13,7 +12,7 @@ package edu.glut.tini.activity;
         import androidx.annotation.NonNull;
         import androidx.core.app.ActivityCompat;
 
-        import edu.glut.tini.MainActivity;
+        import edu.glut.tini.ui.MainActivity;
         import edu.glut.tini.R;
         import edu.glut.tini.contract.LoginContract;
         import edu.glut.tini.presenter.LoginPresenter;

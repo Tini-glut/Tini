@@ -8,7 +8,9 @@
     <string name="password_error">Password is invalid</string>
     <string name="login_fail">Login Fail</string>
     <string name="PERMISSION_DENIED">PERMISSION DENIED</string>
-    <string name="text_label_message" >Message</string>
-    <string name="text_label_friends" >Friends</string>
-    <string name="text_label_account" >Account</string>
+    <string name="text_label_message">Message</string>
+    <string name="text_label_friends">Friends</string>
+    <string name="text_label_account">Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

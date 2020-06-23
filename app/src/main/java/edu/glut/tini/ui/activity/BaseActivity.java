@@ -1,13 +1,7 @@
-package edu.glut.tini.activity;
+package edu.glut.tini.ui.activity;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.inputmethodservice.InputMethodService;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.Nullable;

@@ -30,11 +30,11 @@
         android:name=".app.IMApplication"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.LoginActivity"
+        <activity android:name=".ui.activity.LoginActivity"
             android:theme="@style/AppTheme.FullScreen"/>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".ui.MainActivity"/>
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".ui.activity.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
