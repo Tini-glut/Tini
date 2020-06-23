@@ -43,4 +43,5 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     compile 'com.steelkiwi:sliding-square-loader-view:1.0.0' /*进度条*/
+    compile 'com.roughike:bottom-bar:2.3.1'
 }
