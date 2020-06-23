@@ -1,5 +1,7 @@
 package edu.glut.tini.presenter;
 
+import com.hyphenate.chat.EMClient;
+
 import edu.glut.tini.contract.SplashContract;
 
 public class SplashPresenter implements SplashContract.Presenter {
@@ -18,7 +20,9 @@ public class SplashPresenter implements SplashContract.Presenter {
             view.onNotLoggedIn();
     }
 
+    //是否登录到服务器
     private boolean isLoggedIn() {
-        return false;
+        return EMClient.getInstance().isConnected()
+                && EMClient.getInstance().isLoggedInBefore();
     }
 }

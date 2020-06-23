@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tini</string>
+    <string name="prompt_email">邮箱</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="action_sign_in">注册</string>
+    <string name="username_error">用户名不合法</string>
+    <string name="password_error">密码不合法</string>
+    <string name="login_fail">登录失败</string>
+</resources>

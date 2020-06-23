@@ -11,7 +11,7 @@ import edu.glut.tini.presenter.SplashPresenter;
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
 
-    private final static long DELAY = 1000;   //延迟时间
+    private final static long DELAY = 2000;   //延迟时间
     private final SplashPresenter presenter = new SplashPresenter(this);
 
     @Override
