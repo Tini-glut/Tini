@@ -2,7 +2,9 @@ package edu.glut.tini.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -79,13 +81,18 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     @Override
     public void onRegisterSuccess() {
         loading.setVisibility(View.INVISIBLE);
+        Looper.prepare();
         Toast.makeText(this,getString(R.string.register_success),Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this,LoginActivity.class));
         finish();
+        Looper.loop();
     }
 
     @Override
     public void onRegisterFailed() {
         loading.setVisibility(View.INVISIBLE);
+        Looper.prepare();
         Toast.makeText(this,getString(R.string.register_failed),Toast.LENGTH_LONG).show();
+        Looper.loop();
     }
 }

@@ -16,7 +16,7 @@
     <string name="text_button_register">注册新用户</string>
     <string name="fengexian">|</string>
     <string name="text_label_logout">注销登录</string>
-    <string name="prompt_username_register">(用户名)字母、数字和下划线</string>
+    <string name="prompt_username_register">用户名(字母、数字)</string>
     <string name="prompt_password_register">密码(数字)</string>
     <string name="prompt_password_register_2">确认密码</string>
     <string name="action_register_in_short">注 册</string>
