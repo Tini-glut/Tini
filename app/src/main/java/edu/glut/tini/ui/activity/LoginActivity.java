@@ -38,6 +38,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     private void login(View view) {
+        if (username.getText().toString().isEmpty() || password.getText().toString().isEmpty()) return;
         hideSoftKeyboard();
         if(hasWriteExternalStoragePermission()) {
             loginPresenter.login(username.getText().toString().trim(),
@@ -89,15 +90,18 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
      * 检查是否已经获取写入磁盘的权限
      * */
     private boolean hasWriteExternalStoragePermission() {
-        int permissionID = ActivityCompat.checkSelfPermission(this
+        int permissionID = ActivityCompat.checkSelfPermission(LoginActivity.this
                 , Manifest.permission.WRITE_EXTERNAL_STORAGE);
         return permissionID == PackageManager.PERMISSION_GRANTED;
     }
 
+    /*
+    * 申请写磁盘权限
+    * */
     private void applyWriteExternalStoragePermission() {
         String[] permission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
         ActivityCompat.requestPermissions(this
-                , permission ,0);
+                , permission,0);
     }
 
     @Override

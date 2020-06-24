@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Tini</string>
-    <string name="prompt_email">Email</string>
+    <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in_short">Sign In</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -8,7 +8,11 @@
     <string name="password_error">Password is invalid</string>
     <string name="login_fail">Login Fail</string>
     <string name="PERMISSION_DENIED">PERMISSION DENIED</string>
-    <string name="text_label_message">Message</string>
+    <string name="text_label_conversation">Message</string>
     <string name="text_label_friends">Friends</string>
     <string name="text_label_account">Account</string>
+    <string name="text_button_reset">forget password</string>
+    <string name="text_button_register">register</string>
+    <string name="fengexian">|</string>
+    <string name="text_label_logout">Logout</string>
 </resources>
