@@ -4,7 +4,7 @@
         android:id="@+id/page_message"
         android:enabled="true"
         android:icon="@drawable/ic_message_black_48dp"
-        android:title="@string/text_label_message"/>
+        android:title="@string/text_label_conversation"/>
 
     <item
         android:id="@+id/page_friends"

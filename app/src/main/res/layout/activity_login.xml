@@ -22,21 +22,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <EditText
+    <com.marlonmafra.android.widget.EditTextPassword
         android:id="@+id/username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="280dp"
         android:layout_marginEnd="24dp"
-        android:hint="@string/prompt_email"
-        android:inputType="textEmailAddress"
+        android:hint="@string/prompt_username"
+        android:inputType="text"
         android:selectAllOnFocus="true"
+        android:textSize="@dimen/input_label"
+        app:hidePasswordIcon="@drawable/ic_account_box_black_18dp"
+        app:iconPosition="left"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:showPasswordIcon="@drawable/ic_account_box_black_18dp" />
 
-    <EditText
+    <com.marlonmafra.android.widget.EditTextPassword
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -46,9 +50,13 @@
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:inputType="textPassword"
+        android:textSize="@dimen/input_label"
+        app:hidePasswordIcon="@drawable/ic_lock_outline_black_18dp"
+        app:iconPosition="left"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        app:showPasswordIcon="@drawable/ic_lock_open_black_18dp" />
 
     <Button
         android:id="@+id/login"
@@ -59,8 +67,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="64dp"
-        android:textSize="@dimen/login_label"
         android:text="@string/action_sign_in_short"
+        android:textSize="@dimen/login_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,5 +90,45 @@
         app:layout_constraintStart_toStartOf="@+id/password"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
+
+
+    <Button
+        android:id="@+id/btn_forget_password"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="@string/text_button_reset"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="@color/bottom_blue"
+        android:textSize="@dimen/text_button"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:text="@string/fengexian"
+        android:textSize="@dimen/text_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_text_register"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/text_button_register"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="@color/bottom_blue"
+        android:textSize="@dimen/text_button"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
