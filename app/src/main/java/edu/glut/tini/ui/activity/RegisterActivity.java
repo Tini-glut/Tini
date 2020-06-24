@@ -3,20 +3,24 @@ package edu.glut.tini.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.glut.tini.R;
 import edu.glut.tini.contract.RegisterContract;
+import edu.glut.tini.presenter.RegisterPresenter;
 
 public class RegisterActivity extends BaseActivity implements RegisterContract.View {
 
     private EditText tvUsername,tvPassword,tvConfirmPassword;
     private Button btnRegister;
     private ProgressBar loading;
+    private RegisterPresenter registerPresenter;
 
     @Override
     public int getLayoutResourceId() {
@@ -31,6 +35,23 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         tvConfirmPassword = findViewById(R.id.tv_register_repassword);
         btnRegister = findViewById(R.id.btn_register);
         loading = findViewById(R.id.loading_register);
+        registerPresenter = new RegisterPresenter(this);
+        tvConfirmPassword.setOnEditorActionListener(this::onClickListener);
+        btnRegister.setOnClickListener(this::register);
+    }
+
+    private boolean onClickListener(TextView textView, int i, KeyEvent keyEvent) {
+        register(textView);
+        return true;
+    }
+
+
+    private void register(View view) {
+        hideSoftKeyboard();
+        String username = tvUsername.getText().toString().trim();
+        String password = tvPassword.getText().toString().trim();
+        String password2 = tvConfirmPassword.getText().toString().trim();
+        registerPresenter.register(username, password, password2);
     }
 
     @Override
@@ -45,7 +66,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @Override
     public void onConfirmPasswordError() {
-        tvConfirmPassword.setError(getString(R.string.password_error));
+        tvConfirmPassword.setError(getString(R.string.password_error_not_equals));
     }
 
     @Override
