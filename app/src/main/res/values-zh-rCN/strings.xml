@@ -22,4 +22,5 @@
     <string name="action_register_in_short">注 册</string>
     <string name="register_failed">注册失败</string>
     <string name="password_error_not_equals">密码不相同</string>
+    <string name="register_success">注册成功</string>
 </resources>

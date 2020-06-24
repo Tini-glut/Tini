@@ -1,16 +1,21 @@
 package edu.glut.tini.presenter;
 
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
+import android.content.Context;
 
-import edu.glut.tini.contract.LoginContract;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import edu.glut.tini.contract.RegisterContract;
+import edu.glut.tini.data.AppDatabase;
+import edu.glut.tini.data.dao.UserDao;
+import edu.glut.tini.data.entity.User;
 import edu.glut.tini.utils.StringUtils;
 
 public class RegisterPresenter implements RegisterContract.Presenter {
 
     private RegisterContract.View view;
-
     public RegisterPresenter(RegisterContract.View view) {
         this.view = view;
     }
@@ -24,11 +29,24 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                 // 校验确认密码
                 if (password.equals(confirmPassword)) {
                     view.onStartRegister();
-                } else view.onPasswordError();
+                    //注册到环信服务器
+                    registerOnServer(username,password);
+                } else view.onConfirmPasswordError();
             } else view.onPasswordError();
         }else view.onUserNameError();
+        return true;
+    }
 
 
-        return false;
+    private void registerOnServer(String username, String password) {
+        new Thread(()->{
+            try {
+                EMClient.getInstance().createAccount(username, password);
+                view.onRegisterSuccess();
+            } catch (HyphenateException e) {
+                e.printStackTrace();
+                view.onRegisterFailed();
+            }
+        }).start();
     }
 }

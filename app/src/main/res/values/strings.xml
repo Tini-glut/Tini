@@ -21,4 +21,5 @@
     <string name="action_register_in_short">Register</string>
     <string name="register_failed">Register Fail</string>
     <string name="password_error_not_equals">password not equals</string>
+    <string name="register_success">Register Success</string>
 </resources>

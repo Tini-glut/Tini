@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import edu.glut.tini.R;
 import edu.glut.tini.contract.RegisterContract;
+import edu.glut.tini.data.dao.UserDao;
 import edu.glut.tini.presenter.RegisterPresenter;
 
 public class RegisterActivity extends BaseActivity implements RegisterContract.View {
@@ -47,10 +48,11 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
 
     private void register(View view) {
-        hideSoftKeyboard();
+        //hideSoftKeyboard();
         String username = tvUsername.getText().toString().trim();
         String password = tvPassword.getText().toString().trim();
         String password2 = tvConfirmPassword.getText().toString().trim();
+        if (username.isEmpty() || password.isEmpty() || password2.isEmpty()) return;
         registerPresenter.register(username, password, password2);
     }
 
@@ -72,12 +74,13 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     @Override
     public void onStartRegister() {
         loading.setVisibility(View.VISIBLE);
-        finish();
     }
 
     @Override
     public void onRegisterSuccess() {
         loading.setVisibility(View.INVISIBLE);
+        Toast.makeText(this,getString(R.string.register_success),Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
