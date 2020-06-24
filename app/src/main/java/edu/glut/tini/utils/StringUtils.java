@@ -14,4 +14,9 @@ public class StringUtils {
     public static boolean isValidPassword(String password) {
         return password.matches("^[0-9]\\w{3,20}$");
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
