@@ -15,4 +15,8 @@
     <string name="text_button_register">register</string>
     <string name="fengexian">|</string>
     <string name="text_label_logout">Logout</string>
+    <string name="prompt_username_register">Username</string>
+    <string name="prompt_password_register">Password</string>
+    <string name="prompt_password_register_2">Re-enter Password</string>
+    <string name="action_register_in_short">Register</string>
 </resources>

@@ -62,8 +62,10 @@ public class AccountFragment extends BaseFragment {
 
             @Override
             public void onSuccess() {
-                context.startActivity(new Intent(getActivity(),LoginActivity.class));
-                Objects.requireNonNull(getActivity()).finish();
+                uiThread(()->{
+                    context.startActivity(new Intent(getActivity(),LoginActivity.class));
+                    getActivity().finish();
+                });
             }
 
             @Override
