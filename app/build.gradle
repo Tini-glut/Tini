@@ -43,4 +43,9 @@ dependencies {
     compile 'com.github.yalantis:jellytoolbar:v1.0'
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    compile 'com.marlonmafra.android.widget:edittext-password:1.0.0'
+
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 }

@@ -22,6 +22,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/image_avatar"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
@@ -54,6 +55,7 @@
                 </LinearLayout>
             </LinearLayout>
             <Button
+                android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColor="@color/icons"
