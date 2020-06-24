@@ -20,4 +20,5 @@
     <string name="prompt_password_register">密码(数字)</string>
     <string name="prompt_password_register_2">确认密码</string>
     <string name="action_register_in_short">注 册</string>
+    <string name="register_failed">注册失败</string>
 </resources>
