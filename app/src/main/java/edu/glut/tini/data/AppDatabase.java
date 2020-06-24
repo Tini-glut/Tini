@@ -31,7 +31,6 @@ public abstract class AppDatabase extends RoomDatabase {
     @NotNull
     private static AppDatabase buildDataBase(Context context) {
         return Room.databaseBuilder(context,AppDatabase.class,"appdb")
-                .allowMainThreadQueries()
                 .build();
     }
 
