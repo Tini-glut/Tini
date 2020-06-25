@@ -1,12 +1,12 @@
 <resources>
     <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+    <string-array name="dark_entries">
+        <item>浅色模式</item>
+        <item>深色模式</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <string-array name="dark_values">
+        <item>normal_mode</item>
+        <item>dark_mode</item>
     </string-array>
 </resources>

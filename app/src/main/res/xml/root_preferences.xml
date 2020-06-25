@@ -1,19 +1,11 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/messages_header">
-
-        <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
-
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
+    <PreferenceCategory app:title="@string/push_notification_title">
+        <SwitchPreferenceCompat
+            app:key="@string/push_notification_key"
+            app:defaultValue="false"
+            app:title="@string/do_not_Disturb"
+            app:summary="@string/push_notification_summary"/>
 
     </PreferenceCategory>
 
@@ -31,6 +23,23 @@
             app:summary="@string/auto_login_summary"
             app:title="@string/auto_login_title" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/dark_header">
+
+        <SwitchPreferenceCompat
+            app:key="@string/dark_mode_key"
+            app:defaultValue="true"
+            app:summary="@string/dark_mode_summary"
+            app:title="@string/dark_mode_auto" />
+
+        <ListPreference
+            app:dependency="@string/dark_mode_key"
+            app:entries="@array/dark_entries"
+            app:entryValues="@array/dark_values"
+            app:key="@string/dark_mode_select_key"
+            app:persistent="false"
+            app:title="@string/select_manually_title" />
     </PreferenceCategory>
 
 </PreferenceScreen>
