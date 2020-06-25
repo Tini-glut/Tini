@@ -28,7 +28,6 @@ public class LoginPresenter implements LoginContract.Presenter {
             view.onUserNameError();
         }
 
-
         return false;
     }
 
