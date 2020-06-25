@@ -22,4 +22,22 @@
     <string name="register_failed">Register Fail</string>
     <string name="password_error_not_equals">password not equals</string>
     <string name="register_success">Register Success</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="login_header">About Login</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="login_title">Remember password</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+    <string name="auto_login_title">Auto login</string>
+    <string name="auto_login_summary">"Restart the application to take effect  "</string>
+    <string name="remember_password_key" translatable="false">remember_password</string>
+    <string name="auto_login_key" translatable="false">auto_login</string>
 </resources>
