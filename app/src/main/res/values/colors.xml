@@ -9,4 +9,6 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
     <color name="bottom_blue">#2196F3</color>
+    <color name="white">#FFFFFF</color>
+    <color name="swipe_refresh">#F44336</color>
 </resources>
