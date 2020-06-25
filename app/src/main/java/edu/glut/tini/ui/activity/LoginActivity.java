@@ -12,6 +12,7 @@ package edu.glut.tini.ui.activity;
         import androidx.annotation.NonNull;
         import androidx.core.app.ActivityCompat;
 
+        import butterknife.BindView;
         import edu.glut.tini.ui.MainActivity;
         import edu.glut.tini.R;
         import edu.glut.tini.contract.LoginContract;
@@ -26,15 +27,22 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     private Button loginBtn;
     private ProgressBar loaderView;
     private LoginPresenter loginPresenter = new LoginPresenter(this);
+    private Button register;
 
     @Override
     public void init() {
         super.init();
+        register = findViewById(R.id.btn_text_register);
         loginBtn = findViewById(R.id.login);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         loaderView = findViewById(R.id.loading);
         loginBtn.setOnClickListener(this::login);
+        register.setOnClickListener(this::register);
+    }
+
+    private void register(View view) {
+        startActivity(new Intent(this,RegisterActivity.class));
     }
 
     private void login(View view) {

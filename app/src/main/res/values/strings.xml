@@ -15,4 +15,41 @@
     <string name="text_button_register">register</string>
     <string name="fengexian">|</string>
     <string name="text_label_logout">Logout</string>
+    <string name="prompt_username_register">Username</string>
+    <string name="prompt_password_register">Password</string>
+    <string name="prompt_password_register_2">Re-enter Password</string>
+    <string name="action_register_in_short">Register</string>
+    <string name="register_failed">Register Fail</string>
+    <string name="password_error_not_equals">password not equals</string>
+    <string name="register_success">Register Success</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="login_header">About Login</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title" translatable="false">Your signature</string>
+    <string name="reply_title" translatable="false">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="login_title">Remember password</string>
+    <string name="attachment_title" translatable="false">Download incoming attachments</string>
+    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
+    <string name="auto_login_title">Auto login</string>
+    <string name="auto_login_summary">"Restart the application to take effect  "</string>
+    <string name="remember_password_key" translatable="false">remember_password</string>
+    <string name="auto_login_key" translatable="false">auto_login</string>
+    <string name="push_notification_key" translatable="false">push_notification</string>
+    <string name="push_notification_title">Push Notification</string>
+    <string name="do_not_Disturb">Do Not Disturb</string>
+    <string name="push_notification_summary">Do not disturb after startup, all message notifications will not be received before 6:00 tomorrow.
+</string>
+    <string name="dark_header">Dark Mode</string>
+    <string name="dark_mode_key" translatable="false">dark_mode</string>
+    <string name="dark_mode_auto">Auto</string>
+    <string name="select_manually_key" translatable="false">select_manually</string>
+    <string name="select_manually_title">Select manually</string>
+    <string name="dark_mode_select_key" translatable="false">dark_mode_select</string>
+    <string name="dark_mode_summary">开启后，将跟随系统打开或关闭深色模式</string>
 </resources>

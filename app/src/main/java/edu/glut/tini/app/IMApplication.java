@@ -2,10 +2,14 @@ package edu.glut.tini.app;
 
 import android.app.Application;
 
+
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 
 public class IMApplication extends Application {
+    private static final String TAG = "IMApplication";
+    public static boolean AUTOLOGIN = true;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -16,6 +20,7 @@ public class IMApplication extends Application {
         options.setAutoTransferMessageAttachments(true);
         // 是否自动下载附件类消息的缩略图等，默认为 true 这里和上边这个参数相关联
         options.setAutoDownloadThumbnail(true);
+        options.setAutoLogin(AUTOLOGIN);
 
         //初始化
         EMClient.getInstance().init(IMApplication.this, options);

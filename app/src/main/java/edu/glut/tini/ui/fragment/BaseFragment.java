@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import edu.glut.tini.presenter.BasePresenter;
 import edu.glut.tini.ui.MainActivity;
 import edu.glut.tini.ui.activity.BaseActivity;
 
@@ -19,7 +20,7 @@ import edu.glut.tini.ui.activity.BaseActivity;
  * @Email ardien@126.com
  * @Version 1.0
  **/
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements BasePresenter {
 
     protected View mRootView;
     protected Context context;

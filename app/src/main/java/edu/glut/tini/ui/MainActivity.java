@@ -1,6 +1,9 @@
 package edu.glut.tini.ui;
 
+import android.content.SharedPreferences;
+
 import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,4 +40,6 @@ public class MainActivity extends BaseActivity {
             return true;
         });
     }
+
+
 }
