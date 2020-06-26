@@ -40,4 +40,8 @@ public class FragmentFactory {
         }
         return instances.get(id);
     }
+
+    public static Map<Integer, Fragment> getInstances() {
+        return instances;
+    }
 }

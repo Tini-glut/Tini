@@ -44,7 +44,7 @@ public class AccountFragment extends BaseFragment {
         MainActivity.getMaterialToolbar().setTitle(getString(R.string.text_label_account));
         initCurrentUserInfo();
 
-
+        initSetting();
     }
 
     /*
@@ -76,5 +76,12 @@ public class AccountFragment extends BaseFragment {
             public void onError(int code, String message) {
             }
         });
+    }
+
+    private void initSetting() {
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.settings, new SettingsFragment())
+                .commit();
     }
 }
