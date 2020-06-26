@@ -5,7 +5,7 @@
             app:key="@string/push_notification_key"
             app:defaultValue="false"
             app:title="@string/do_not_Disturb"
-            app:summary="@string/push_notification_summary"/>
+            />
 
     </PreferenceCategory>
 
@@ -19,7 +19,7 @@
         <SwitchPreferenceCompat
             app:dependency="@string/remember_password_key"
             app:key="@string/auto_login_key"
-            app:defaultValue="false"
+            app:defaultValue="true"
             app:summary="@string/auto_login_summary"
             app:title="@string/auto_login_title" />
 
@@ -30,15 +30,13 @@
         <SwitchPreferenceCompat
             app:key="@string/dark_mode_key"
             app:defaultValue="true"
-            app:summary="@string/dark_mode_summary"
             app:title="@string/dark_mode_auto" />
 
         <ListPreference
-            app:dependency="@string/dark_mode_key"
             app:entries="@array/dark_entries"
             app:entryValues="@array/dark_values"
             app:key="@string/dark_mode_select_key"
-            app:persistent="false"
+            app:useSimpleSummaryProvider="true"
             app:title="@string/select_manually_title" />
     </PreferenceCategory>
 

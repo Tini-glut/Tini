@@ -1,10 +1,11 @@
 package edu.glut.tini.app;
 
 import android.app.Application;
-
-
+import android.content.SharedPreferences;
+import androidx.preference.PreferenceManager;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+import edu.glut.tini.R;
 
 public class IMApplication extends Application {
     private static final String TAG = "IMApplication";
@@ -14,6 +15,9 @@ public class IMApplication extends Application {
     public void onCreate() {
         super.onCreate();
         EMOptions options = new EMOptions();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        AUTOLOGIN = preferences.getBoolean(getString(R.string.auto_login_key),true);
+
         // 默认添加好友时，是不需要验证的，改成需要验证
         options.setAcceptInvitationAlways(false);
         // 是否自动将消息附件上传到环信服务器，默认为True是使用环信服务器上传下载，如果设为 false，需要开发者自己处理附件消息的上传和下载

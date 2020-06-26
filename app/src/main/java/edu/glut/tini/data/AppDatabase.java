@@ -12,7 +12,7 @@ import edu.glut.tini.data.dao.UserDao;
 import edu.glut.tini.data.entity.User;
 
 /**
- * 将数据库访问层类填写至 "entities = {}"里,，并提供一个抽象的获取Dao的方法
+ * 实体类填写至 "entities = {}"里,，并提供一个抽象的获取Dao的方法
  * */
 @Database(entities = {User.class},version = 1,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
