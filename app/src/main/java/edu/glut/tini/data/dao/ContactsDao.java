@@ -35,5 +35,10 @@ public interface ContactsDao {
     @Query("SELECT * FROM Contacts")
     public List<Contacts> selectAll();
 
+    @Query("DELETE FROM Contacts")
+    public void deleteAll();
 
+
+   @Query("INSERT OR REPLACE INTO Contacts ('ContactsFriendUsername') VALUES(:userName)")
+    public void insertInto(String userName);
 }

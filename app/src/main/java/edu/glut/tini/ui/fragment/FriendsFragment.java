@@ -1,12 +1,14 @@
 package edu.glut.tini.ui.fragment;
 
-import android.view.View;
-import android.widget.LinearLayout;
+
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.hyphenate.EMContactListener;
+import com.hyphenate.chat.EMClient;
 
 import edu.glut.tini.R;
 import edu.glut.tini.adapter.FriendsListAdapter;
@@ -20,7 +22,8 @@ import edu.glut.tini.ui.MainActivity;
  */
 public class FriendsFragment extends BaseFragment implements FriendsContract.View {
 
-    private FriendsPresenter friendsPresenter = new FriendsPresenter(this);
+//    private FriendsPresenter friendsPresenter = new FriendsPresenter(this,context);
+    private FriendsPresenter friendsPresenter ;
     private FriendsListItem friendsListItem;
 
     @Override
@@ -34,16 +37,49 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
     @Override
     protected void init() {
         super.init();
+        friendsPresenter = new FriendsPresenter(this,context);
         swipeRefreshLayout = mRootView.findViewById(R.id.swiperefreshlayout);
         recyclerView = mRootView.findViewById(R.id.recyclerView);
         swipeRefreshLayout.setColorSchemeResources(R.color.swipe_refresh);
+        //下拉刷新联系人列表
         swipeRefreshLayout.setOnRefreshListener(() -> friendsPresenter.loadFriends());
+        //进入联系人界面时刷新联系人列表
+        friendsPresenter.loadFriendsFromDB();
+        //设置标题
         MainActivity.getMaterialToolbar().setTitle(getString(R.string.text_label_friends));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new FriendsListAdapter(context, friendsPresenter.getFriendsListItems()));
 
-        friendsPresenter.loadFriends();
+        //联系人监听器
+        EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
+            @Override
+            public void onContactAdded(String s) {
+
+            }
+
+            @Override
+            public void onContactDeleted(String s) {
+                friendsPresenter.loadFriends();
+            }
+
+            @Override
+            public void onContactInvited(String s, String s1) {
+
+            }
+
+            @Override
+            public void onFriendRequestAccepted(String s) {
+
+            }
+
+            @Override
+            public void onFriendRequestDeclined(String s) {
+
+            }
+        });
+
+
 
     }
 

@@ -2,6 +2,7 @@ package edu.glut.tini.data.dao;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -44,9 +45,40 @@ public class ContactsDaoTest {
             contactsDao =  AppDatabase.getInstance(appContext).getContactsDao();
             for (String username : usernames) {
                 contactsDao.add(new Contacts(username));
+                System.out.println("hhhhhhhh");
             }
         } catch (HyphenateException e) {
             e.printStackTrace();
         }
     }
+    @Test
+    public void select(){
+        appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        contactsDao = AppDatabase.getInstance(appContext).getContactsDao();
+        List<Contacts> contacts = contactsDao.selectAll();
+
+        System.out.println("aaaaaaaaaa");
+        for (Contacts contact : contacts) {
+            System.out.println(contact.getContactsFriendUsername());
+        }
+    }
+
+    @Test
+    public void deleteAll(){
+        appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        contactsDao = AppDatabase.getInstance(appContext).getContactsDao();
+        contactsDao.deleteAll();
+        System.out.println("deletaAlldeletaAlldeletaAll");
+
+    }
+    @Test
+    public void updateContactsSeq(){
+        appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        contactsDao = AppDatabase.getInstance(appContext).getContactsDao();
+//        contactsDao.updateContactsSeq();
+        System.out.println("updateContactsSequpdateContactsSeq");
+
+    }
+
+
 }

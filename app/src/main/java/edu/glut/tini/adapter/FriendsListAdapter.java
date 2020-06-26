@@ -3,6 +3,7 @@ package edu.glut.tini.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -10,6 +11,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.adapter.EMAChatClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,12 +73,32 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     //删除好友操作
     private void delFriend(String userName) {
+        //环信异步删除好友方法
+        EMClient.getInstance().contactManager().aysncDeleteContact(userName, new EMCallBack() {
 
+            @Override
+            public void onSuccess() {
+                Looper.prepare();
+                Toast.makeText(context,"删除成功",Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Looper.prepare();
+                Toast.makeText(context,"删除失败",Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        System.out.println(friendsListItems.size());
         return friendsListItems.size();
     }
 
