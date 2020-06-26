@@ -48,4 +48,5 @@ dependencies {
     compile 'com.marlonmafra.android.widget:edittext-password:1.0.0'
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }

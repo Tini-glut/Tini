@@ -16,7 +16,7 @@ public class IMApplication extends Application {
         super.onCreate();
         EMOptions options = new EMOptions();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        AUTOLOGIN = preferences.getBoolean(getString(R.string.auto_login_key),true);
+        //AUTOLOGIN = preferences.getBoolean(getString(R.string.auto_login_key),true);
 
         // 默认添加好友时，是不需要验证的，改成需要验证
         options.setAcceptInvitationAlways(false);
