@@ -34,6 +34,7 @@
         <activity android:name=".ui.activity.LoginActivity"
             android:theme="@style/AppTheme.FullScreen"/>
         <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.activity.RegisterActivity" android:theme="@style/AppTheme.FullScreen"/>
         <activity
             android:name=".ui.activity.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">

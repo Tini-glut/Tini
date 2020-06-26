@@ -12,7 +12,6 @@ package edu.glut.tini.ui.activity;
         import androidx.annotation.NonNull;
         import androidx.core.app.ActivityCompat;
 
-        import butterknife.BindView;
         import edu.glut.tini.ui.MainActivity;
         import edu.glut.tini.R;
         import edu.glut.tini.contract.LoginContract;

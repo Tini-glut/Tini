@@ -10,10 +10,7 @@ import android.widget.TextView;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
-import java.util.Objects;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import edu.glut.tini.R;
 import edu.glut.tini.ui.MainActivity;
 import edu.glut.tini.ui.activity.LoginActivity;
