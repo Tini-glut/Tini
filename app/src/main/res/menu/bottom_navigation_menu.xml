@@ -3,17 +3,17 @@
     <item
         android:id="@+id/page_message"
         android:enabled="true"
-        android:icon="@drawable/ic_message_black_48dp"
+        android:icon="@drawable/baseline_message_black_48"
         android:title="@string/text_label_conversation"/>
 
     <item
         android:id="@+id/page_friends"
         android:enabled="true"
-        android:icon="@drawable/ic_contact_mail_black_48dp"
+        android:icon="@drawable/baseline_contacts_black_48"
         android:title="@string/text_label_friends"/>
     <item
         android:id="@+id/page_account"
         android:enabled="true"
-        android:icon="@drawable/ic_account_circle_black_48dp"
+        android:icon="@drawable/baseline_account_circle_black_48"
         android:title="@string/text_label_account"/>
 </menu>

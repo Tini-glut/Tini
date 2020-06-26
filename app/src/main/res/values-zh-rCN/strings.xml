@@ -15,7 +15,7 @@
     <string name="text_button_reset">忘记密码</string>
     <string name="text_button_register">注册新用户</string>
     <string name="fengexian">|</string>
-    <string name="text_label_logout">注销登录</string>
+    <string name="text_label_logout">注 销</string>
     <string name="prompt_username_register">用户名(字母、数字)</string>
     <string name="prompt_password_register">密码(数字)</string>
     <string name="prompt_password_register_2">确认密码</string>
@@ -35,4 +35,8 @@
     <string name="dark_mode_auto">跟随系统</string>
     <string name="select_manually_title">手动选择</string>
     <string name="dark_mode_summary">开启后，将跟随系统打开或关闭深色模式</string>
+    <string name="text_label_search">搜索</string>
+    <string name="text_label_more">更多</string>
+    <string name="text_label_add_contacts">添加好友</string>
+    <string name="text_label_add_from_photo">扫一扫</string>
 </resources>

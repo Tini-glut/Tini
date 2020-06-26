@@ -27,7 +27,7 @@
                         android:layout_height="50dp"
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/fragment_layout_margin_left"
-                        app:srcCompat="@drawable/logo"
+                        app:srcCompat="@mipmap/logo"
                         android:scaleType="centerCrop"
                         />
 

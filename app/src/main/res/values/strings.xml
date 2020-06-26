@@ -52,4 +52,8 @@
     <string name="select_manually_title">Select manually</string>
     <string name="dark_mode_select_key" translatable="false">dark_mode_select</string>
     <string name="dark_mode_summary">开启后，将跟随系统打开或关闭深色模式</string>
+    <string name="text_label_search">Search</string>
+    <string name="text_label_more">More</string>
+    <string name="text_label_add_contacts">Add Contacts</string>
+    <string name="text_label_add_from_photo">Scan</string>
 </resources>
