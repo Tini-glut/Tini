@@ -80,11 +80,10 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @Override
     public void onRegisterSuccess() {
-        loading.setVisibility(View.INVISIBLE);
         Looper.prepare();
+        loading.setVisibility(View.INVISIBLE);
         Toast.makeText(this,getString(R.string.register_success),Toast.LENGTH_LONG).show();
         startActivity(new Intent(this,LoginActivity.class));
-        Looper.loop();
         finish();
 
     }
@@ -92,8 +91,6 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     @Override
     public void onRegisterFailed() {
         loading.setVisibility(View.INVISIBLE);
-        Looper.prepare();
         Toast.makeText(this,getString(R.string.register_failed),Toast.LENGTH_LONG).show();
-        Looper.loop();
     }
 }

@@ -40,7 +40,7 @@ public class AddContactActivity extends BaseActivity implements AddContactsContr
         searchKey = findViewById(R.id.search_username);
         searchBtn = findViewById(R.id.btn_search_image);
         searchResultRecyclerView = findViewById(R.id.add_contact_search_result);
-        contactsPresenter = new AddContactsPresenter(this);
+        contactsPresenter = new AddContactsPresenter(this,getApplicationContext());
 
         searchResultRecyclerView.setHasFixedSize(true);
         searchResultRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
