@@ -91,12 +91,7 @@ public class FriendsPresenter implements FriendsContract.Presenter {
      * @param friendsListItems
      */
     void sortFriends(List<FriendsListItem> friendsListItems) {
-        friendsListItems.sort((o1, o2) -> {
-            int diff = o1.getFirstLetter() - o2.getFirstLetter();
-            if (diff > 0) return 1;
-            else if (diff < 0) return -1;
-            return 0;
-        });
+        friendsListItems.sort((o1, o2) -> o1.getUserName().compareTo(o2.getUserName()));
 
         for (int i = 0; i < friendsListItems.size(); i++) {
             //1.若是第一个 显示      2.若前一个首字母和当前首字母不同 显示
