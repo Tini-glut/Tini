@@ -27,6 +27,7 @@ public class IMApplication extends Application {
         options.setAutoTransferMessageAttachments(true);
         // 是否自动下载附件类消息的缩略图等，默认为 true 这里和上边这个参数相关联
         options.setAutoDownloadThumbnail(true);
+        options.setAcceptInvitationAlways(true);
         options.setAutoLogin(AUTOLOGIN);
 
         //初始化
