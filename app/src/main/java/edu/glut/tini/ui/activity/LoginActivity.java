@@ -40,6 +40,18 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         register.setOnClickListener(this::register);
     }
 
+    @Override
+    protected void onResume() {
+        Intent fromRegister = getIntent();
+        if (fromRegister != null) {
+            String uStr = fromRegister.getStringExtra("username");
+            String uPsd = fromRegister.getStringExtra("password");
+            username.setText(uStr);
+            password.setText(uPsd);
+        }
+        super.onResume();
+    }
+
     private void register(View view) {
         startActivity(new Intent(this,RegisterActivity.class));
     }
