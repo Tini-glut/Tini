@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
 
@@ -41,25 +43,35 @@ public class ActionContactShowListItem extends RelativeLayout {
         username = findViewById(R.id.list_label_username);
         date = findViewById(R.id.list_label_username_date);
         button = findViewById(R.id.btn_add_contact);
-        button.setOnClickListener(this::addContact);
+        button.setOnClickListener((view)->addContact(username.getText().toString()));
 
     }
 
-    private void addContact(View view) {
+    private void addContact(String toAddUsername) {
         Handler handler = new android.os.Handler(Looper.getMainLooper());
-        String toAddUsername = username.getText().toString().trim();
-        String reason = "";
-
-        new Thread(()-> {
-            try {
-                EMClient.getInstance().contactManager().addContact(toAddUsername, reason);
+        String reason = null;
+        EMClient.getInstance()
+                .contactManager()
+                .aysncAddContact(toAddUsername, reason, new EMCallBack() {@Override
+            public void onSuccess() {
                 handler.post(()->{
-                    Toast.makeText(getContext(),"已发送",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"已发送好友请求给"+toAddUsername,Toast.LENGTH_LONG).show();
                 });
-            } catch (HyphenateException e) {
-                e.printStackTrace();
             }
-        }).start();
+
+            @Override
+            public void onError(int i, String s) {
+                handler.post(()->{
+                    Toast.makeText(getContext(),"发送好友请求失败",Toast.LENGTH_LONG).show();
+                });
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
+
     }
 
     public void bindView(ContactItem contactItem) {

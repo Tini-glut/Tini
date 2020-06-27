@@ -16,15 +16,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
 
                     <ImageView
+                        android:layout_centerVertical="true"
                         android:id="@+id/image_avatar"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="@dimen/image_avatar"
+                        android:layout_height="@dimen/image_avatar"
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/fragment_layout_margin_left"
                         app:srcCompat="@mipmap/logo"
@@ -32,6 +32,7 @@
                         />
 
                     <LinearLayout
+                        android:layout_toEndOf="@+id/image_avatar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -53,7 +54,21 @@
                             android:textColor="?android:attr/textColorSecondary"
                             />
                     </LinearLayout>
-                </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/icons"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:text="@string/text_label_logout"
+                        android:textSize="@dimen/login_label"
+                        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                        android:layout_marginStart="@dimen/fragment_layout_margin_left"
+                        android:layout_marginEnd="@dimen/fragment_layout_margin_right"
+                        />
+                </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -66,24 +81,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            app:cardElevation="@dimen/card_elevation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
-            <Button
-                android:id="@+id/btn_logout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/icons"
-                android:text="@string/text_label_logout"
-                android:textSize="@dimen/login_label"
-                android:textAppearance="?android:attr/textAppearanceLargeInverse"
-                android:layout_marginStart="@dimen/fragment_layout_margin_left"
-                android:layout_marginEnd="@dimen/fragment_layout_margin_right"
-                />
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 

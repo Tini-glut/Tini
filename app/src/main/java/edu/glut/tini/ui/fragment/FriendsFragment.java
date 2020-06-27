@@ -55,7 +55,7 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
         EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
             @Override
             public void onContactAdded(String s) {
-
+                friendsPresenter.loadFriends();
             }
 
             @Override
