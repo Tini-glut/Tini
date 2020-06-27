@@ -32,7 +32,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      * fix：隐藏软键盘
      * */
     public void hideSoftKeyboard() {
-        manager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),0);
+        if (getCurrentFocus() != null)
+            manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
     }
 
     /**
