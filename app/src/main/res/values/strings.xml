@@ -56,4 +56,9 @@
     <string name="text_label_more">More</string>
     <string name="text_label_add_contacts">Add Contacts</string>
     <string name="text_label_add_from_photo">Scan</string>
+    <string name="text_label_add_contact">Add</string>
+    <string name="about_contact">About contacts</string>
+    <string name="accept_invitation_key" translatable="false">acceptInvitation</string>
+    <string name="accept_nvitation_title">Accept Invitation</string>
+    <string name="query_hint_label">Username</string>
 </resources>

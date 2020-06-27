@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:elevation="@dimen/card_elevation"
+    android:layout_margin="@dimen/margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/list_image_avatar"
+            android:layout_width="@dimen/image_avatar"
+            android:layout_height="@dimen/image_avatar"
+            android:layout_margin="@dimen/margin"
+            android:src="@mipmap/logo"/>
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/list_image_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/image_avatar"
+            android:layout_margin="@dimen/margin"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/list_label_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:text="Admin"
+                />
+            <TextView
+                android:id="@+id/list_label_username_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_margin="@dimen/margin"
+                android:text="2019-2-4"
+                android:textColor="?android:attr/textColorSecondary"
+                />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_add_contact"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:textColor="@color/icons"
+            android:text="@string/text_label_add_contact"
+            android:textSize="@dimen/login_label"
+            android:layout_alignParentEnd="true"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            />
+    </RelativeLayout>
+    
+</androidx.cardview.widget.CardView>

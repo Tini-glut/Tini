@@ -13,4 +13,6 @@
     <dimen name="input_label">18sp</dimen>
     <dimen name="text_button">14sp</dimen>
     <dimen name="card_elevation">5dp</dimen>
+    <dimen name="image_button">25dp</dimen>
+    <dimen name="image_avatar">60dp</dimen>
 </resources>

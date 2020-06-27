@@ -29,11 +29,16 @@ public interface ContactsDao {
     @Update
     public void update(Contacts contacts);
 
-    @Query("SELECT * FROM Contacts WHERE ContactsFriendUsername LIKE :username")
+    @Query("SELECT * FROM Contacts WHERE ContactsFriendUsername LIKE '%' || :username || '%'")
     public List<Contacts> selectContactsByUsername(String username);
 
     @Query("SELECT * FROM Contacts")
     public List<Contacts> selectAll();
 
+    @Query("DELETE FROM Contacts")
+    public void deleteAll();
 
+
+   @Query("INSERT OR REPLACE INTO Contacts ('ContactsFriendUsername') VALUES(:userName)")
+    public void insertInto(String userName);
 }

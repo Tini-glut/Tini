@@ -10,9 +10,9 @@ import java.util.List;
 
 import edu.glut.tini.data.entity.User;
 
-@Dao
+
 public interface UserDao {
-    @Insert
+   /* @Insert
     public void add(User user);
 
     @Query("SELECT * FROM USER WHERE USERNAME LIKE :username")
@@ -25,5 +25,5 @@ public interface UserDao {
     public void update(User user);
 
     @Query("SELECT * FROM User")
-    public List<User> selectAll();
+    public List<User> selectAll();*/
 }

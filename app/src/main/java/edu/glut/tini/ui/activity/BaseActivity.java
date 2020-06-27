@@ -2,7 +2,9 @@ package edu.glut.tini.ui.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import java.util.Objects;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private InputMethodManager manager;
+    private ProgressBar bar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,7 +32,8 @@ public abstract class BaseActivity extends AppCompatActivity {
      * fix：隐藏软键盘
      * */
     public void hideSoftKeyboard() {
-        manager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getWindowToken(),0);
+        if (getCurrentFocus() != null)
+            manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
     }
 
     /**
@@ -43,5 +47,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void init() {
         manager =
                 (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    }
+
+    public void showProgressBar(Context context) {
+        bar = new ProgressBar(context);
+        bar.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgressBar() {
+        bar.setVisibility(View.INVISIBLE);
     }
 }

@@ -80,19 +80,20 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @Override
     public void onRegisterSuccess() {
-        loading.setVisibility(View.INVISIBLE);
         Looper.prepare();
+        loading.setVisibility(View.INVISIBLE);
         Toast.makeText(this,getString(R.string.register_success),Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this,LoginActivity.class));
+        Intent toLogin = new Intent(this,LoginActivity.class);
+        toLogin.putExtra("username",tvUsername.getText().toString());
+        toLogin.putExtra("password",tvPassword.getText().toString());
+        startActivity(toLogin);
         finish();
-        Looper.loop();
+
     }
 
     @Override
     public void onRegisterFailed() {
         loading.setVisibility(View.INVISIBLE);
-        Looper.prepare();
         Toast.makeText(this,getString(R.string.register_failed),Toast.LENGTH_LONG).show();
-        Looper.loop();
     }
 }
