@@ -5,10 +5,13 @@ import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+
+import cn.bmob.v3.Bmob;
 import edu.glut.tini.R;
 
 public class IMApplication extends Application {
     private static final String TAG = "IMApplication";
+    private static final String key = "60f184af6b1abc4ae4a4b03565f1af10";
     public static boolean AUTOLOGIN = true;
 
     @Override
@@ -30,5 +33,9 @@ public class IMApplication extends Application {
         EMClient.getInstance().init(IMApplication.this, options);
         //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
         EMClient.getInstance().setDebugMode(true);
+
+        //初始化Bmod
+
+        Bmob.initialize(IMApplication.this,key);
     }
 }

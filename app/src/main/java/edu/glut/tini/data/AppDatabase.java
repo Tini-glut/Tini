@@ -9,16 +9,13 @@ import androidx.room.RoomDatabase;
 import com.hyphenate.chat.EMClient;
 
 import org.jetbrains.annotations.NotNull;
-
 import edu.glut.tini.data.dao.ContactsDao;
-import edu.glut.tini.data.dao.UserDao;
 import edu.glut.tini.data.entity.Contacts;
-import edu.glut.tini.data.entity.User;
 
 /**
  * 实体类填写至 "entities = {}"里,，并提供一个抽象的获取Dao的方法
  * */
-@Database(entities = {User.class, Contacts.class},version = 1,exportSchema = false)
+@Database(entities = {Contacts.class},version = 1,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase instance = null;
     public static AppDatabase getInstance(Context context) {
@@ -39,6 +36,5 @@ public abstract class AppDatabase extends RoomDatabase {
                 .build();
     }
 
-    public abstract UserDao getUserDao();
     public abstract ContactsDao getContactsDao();
 }

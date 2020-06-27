@@ -84,8 +84,9 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         Looper.prepare();
         Toast.makeText(this,getString(R.string.register_success),Toast.LENGTH_LONG).show();
         startActivity(new Intent(this,LoginActivity.class));
-        finish();
         Looper.loop();
+        finish();
+
     }
 
     @Override

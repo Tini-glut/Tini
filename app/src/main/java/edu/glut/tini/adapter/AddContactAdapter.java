@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+import edu.glut.tini.data.entity.ContactItem;
 import edu.glut.tini.widget.ActionContactShowListItem;
 
 /**
@@ -18,9 +21,11 @@ import edu.glut.tini.widget.ActionContactShowListItem;
 public class AddContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
+    private List<ContactItem> data;
 
-    public AddContactAdapter(Context context) {
+    public AddContactAdapter(Context context, List<ContactItem> data) {
         this.context = context;
+        this.data = data;
     }
 
     @NonNull
@@ -31,12 +36,13 @@ public class AddContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+        ActionContactShowListItem itemView = (ActionContactShowListItem) holder.itemView;
+        itemView.bindView(data.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 30;
+        return data.size();
     }
 
     private static class AddContactAdapterViewHolder extends RecyclerView.ViewHolder{

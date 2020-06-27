@@ -7,6 +7,8 @@ import com.hyphenate.exceptions.HyphenateException;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 import edu.glut.tini.contract.RegisterContract;
 import edu.glut.tini.data.AppDatabase;
 import edu.glut.tini.data.dao.UserDao;
@@ -29,16 +31,34 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                 // 校验确认密码
                 if (password.equals(confirmPassword)) {
                     view.onStartRegister();
-                    //注册到环信服务器
-                    registerOnServer(username,password);
+
+
+                    //注册到本地服务器
+                    registerOnBmodServer(username,password);
+
                 } else view.onConfirmPasswordError();
             } else view.onPasswordError();
         }else view.onUserNameError();
         return true;
     }
 
+    private void registerOnBmodServer(String username, String password) {
+        User user = new User(username,password);
+        user.signUp(new SaveListener<User>() {
+            @Override
+            public void done(User user, BmobException e) {
+                if (e == null) {
+                    registerOnIMServer(username,password);
+                }else {
+                    view.onRegisterFailed();
+                }
+            }
+        });
 
-    private void registerOnServer(String username, String password) {
+    }
+
+
+    private void registerOnIMServer(String username, String password) {
         new Thread(()->{
             try {
                 EMClient.getInstance().createAccount(username, password);
