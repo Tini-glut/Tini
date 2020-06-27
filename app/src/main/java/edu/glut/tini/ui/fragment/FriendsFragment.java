@@ -22,8 +22,7 @@ import edu.glut.tini.ui.MainActivity;
  */
 public class FriendsFragment extends BaseFragment implements FriendsContract.View {
 
-//    private FriendsPresenter friendsPresenter = new FriendsPresenter(this,context);
-    private FriendsPresenter friendsPresenter ;
+    private FriendsPresenter friendsPresenter;
     private FriendsListItem friendsListItem;
 
     @Override
@@ -37,7 +36,7 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
     @Override
     protected void init() {
         super.init();
-        friendsPresenter = new FriendsPresenter(this,context);
+        friendsPresenter = new FriendsPresenter(this, context);
         swipeRefreshLayout = mRootView.findViewById(R.id.swiperefreshlayout);
         recyclerView = mRootView.findViewById(R.id.recyclerView);
         swipeRefreshLayout.setColorSchemeResources(R.color.swipe_refresh);
@@ -80,7 +79,6 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
         });
 
 
-
     }
 
 
@@ -96,5 +94,18 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
         System.out.println("onLoadFriendsFailed");
         swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(context, "loadFriendsFailed", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void loadFriendsFromDBSuccess() {
+        System.out.println("loadFriendsFromDBSuccess");
+        recyclerView.getAdapter().notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void loadFriendsFromDBFailed() {
+        System.out.println("loadFriendsFromDBFailed");
+        Toast.makeText(context, "请尝试下拉刷新好友列表", Toast.LENGTH_SHORT).show();
     }
 }

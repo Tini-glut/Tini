@@ -12,5 +12,9 @@ public interface FriendsContract {
     interface View{
         void onLoadFriendsSuccess();
         void onLoadFriendsFailed();
+
+        void loadFriendsFromDBSuccess();
+
+        void loadFriendsFromDBFailed();
     }
 }

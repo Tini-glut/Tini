@@ -67,17 +67,17 @@ public class FriendsPresenter implements FriendsContract.Presenter {
             ContactsDao contactsDao = AppDatabase.getInstance(context).getContactsDao();
             List<Contacts> contacts = contactsDao.selectAll();
 
-          if (!contacts.isEmpty()){
-              for (Contacts contact : contacts) {
-                  friendsListItems.add(new FriendsListItem(contact.getContactsFriendUsername(),
-                          contact.getContactsFriendUsername().toUpperCase().charAt(0),
-                          false));
-              }
-              sortFriends(friendsListItems);
-              uiThread(() -> view.onLoadFriendsSuccess());
-          }else {
-              uiThread(() -> view.onLoadFriendsFailed());
-          }
+            if (!contacts.isEmpty()) {
+                for (Contacts contact : contacts) {
+                    friendsListItems.add(new FriendsListItem(contact.getContactsFriendUsername(),
+                            contact.getContactsFriendUsername().toUpperCase().charAt(0),
+                            false));
+                }
+                sortFriends(friendsListItems);
+                uiThread(() -> view.loadFriendsFromDBSuccess());
+            } else {
+                uiThread(() -> view.loadFriendsFromDBFailed());
+            }
 
         });
         thread.start();
