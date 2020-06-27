@@ -3,6 +3,7 @@ package edu.glut.tini.presenter;
 import android.content.Context;
 
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import java.util.ArrayList;
 
@@ -49,7 +50,7 @@ public class FriendsPresenter implements FriendsContract.Presenter {
                 System.out.println(userList);
                 System.out.println(friendsListItems);
                 uiThread(() -> view.onLoadFriendsSuccess());
-            } catch (Exception e) {
+            } catch (HyphenateException e) {
                 e.printStackTrace();
                 uiThread(() -> view.onLoadFriendsFailed());
             }
@@ -76,7 +77,8 @@ public class FriendsPresenter implements FriendsContract.Presenter {
                 sortFriends(friendsListItems);
                 uiThread(() -> view.loadFriendsFromDBSuccess());
             } else {
-                uiThread(() -> view.loadFriendsFromDBFailed());
+//                uiThread(() -> view.loadFriendsFromDBFailed());
+                loadFriends();
             }
 
         });
