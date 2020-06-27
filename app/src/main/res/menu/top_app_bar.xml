@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/favorite"
+        android:id="@+id/search"
         android:icon="@drawable/baseline_search_white_24"
         android:title="@string/text_label_search"
         app:showAsAction="always" />
@@ -13,10 +13,12 @@
         app:showAsAction="ifRoom">
         <menu>
             <item
+                android:id="@+id/add_contact"
                 android:icon="@drawable/baseline_group_add_black_24"
                 android:title="@string/text_label_add_contacts"
-                app:showAsAction="always"/>
+                app:showAsAction="ifRoom"/>
             <item
+                android:id="@+id/qr_code_scanner"
                 android:icon="@drawable/baseline_qr_code_scanner_black_24"
                 android:title="@string/text_label_add_from_photo"
                 app:showAsAction="always"/>
