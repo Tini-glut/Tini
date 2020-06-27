@@ -39,4 +39,5 @@
     <string name="text_label_more">更多</string>
     <string name="text_label_add_contacts">添加好友</string>
     <string name="text_label_add_from_photo">扫一扫</string>
+    <string name="text_label_add_contact">Add</string>
 </resources>
