@@ -15,4 +15,5 @@
     <dimen name="card_elevation">5dp</dimen>
     <dimen name="image_button">25dp</dimen>
     <dimen name="image_avatar">60dp</dimen>
+    <dimen name="chat_header_text">22sp</dimen>
 </resources>

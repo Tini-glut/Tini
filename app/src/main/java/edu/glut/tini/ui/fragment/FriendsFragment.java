@@ -119,7 +119,7 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
         int i = 0;
         List<FriendsListItem> friendsListItems = friendsPresenter.getFriendsListItems();
         for (; i < friendsListItems.size(); i++) {
-            if (friendsListItems.get(i).getFirstLetter() == letter.charAt(0)) {
+            if (friendsListItems.get(i).getFirstLetter() == letter.toUpperCase().charAt(0)) {
 //                System.out.println("里面的i:" + i);
                 olderIndex = i;
                 return i;

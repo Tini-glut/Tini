@@ -15,4 +15,5 @@
     <color name="colorStart">#cb5ed9</color>
     <color name="colorEnd">#8463d4</color>
     <color name="first_letter">#F0F0F0</color>
+    <color name="chat_line">#BDBDBD</color>
 </resources>

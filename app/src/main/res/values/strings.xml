@@ -61,4 +61,9 @@
     <string name="accept_invitation_key" translatable="false">acceptInvitation</string>
     <string name="accept_nvitation_title">Accept Invitation</string>
     <string name="query_hint_label">Username</string>
+
+    <string name="button_send">Send</string>
+
+    <drawable name="btn_send_disable">#88CFC0</drawable>
+    <drawable name="btn_send_enable">#19CFC0</drawable>
 </resources>
