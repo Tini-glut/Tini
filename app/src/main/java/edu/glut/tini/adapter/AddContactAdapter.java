@@ -51,4 +51,9 @@ public class AddContactAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             super(itemView);
         }
     }
+
+    @Override
+    public long getItemId(int position) {
+        return  position;
+    }
 }

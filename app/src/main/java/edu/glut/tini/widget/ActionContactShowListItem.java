@@ -35,9 +35,11 @@ public class ActionContactShowListItem extends RelativeLayout {
     private TextView username;
     private TextView date;
     private Button button;
+    private Context context;
 
     public ActionContactShowListItem(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         View.inflate(context, R.layout.action_contact_show_list_item,this);
         avatar = findViewById(R.id.list_image_avatar);
         username = findViewById(R.id.list_label_username);
@@ -49,10 +51,10 @@ public class ActionContactShowListItem extends RelativeLayout {
 
     private void addContact(String toAddUsername) {
         Handler handler = new android.os.Handler(Looper.getMainLooper());
-        String reason = null;
         EMClient.getInstance()
                 .contactManager()
-                .aysncAddContact(toAddUsername, reason, new EMCallBack() {@Override
+                .aysncAddContact(toAddUsername, null, new EMCallBack() {
+            @Override
             public void onSuccess() {
                 handler.post(()->{
                     Toast.makeText(getContext(),"已发送好友请求给"+toAddUsername,Toast.LENGTH_LONG).show();
@@ -82,5 +84,10 @@ public class ActionContactShowListItem extends RelativeLayout {
         if (contactItem.isAdd()) {
             button.setVisibility(View.INVISIBLE);
         }
+    }
+
+
+    public void getApplyReason() {
+
     }
 }

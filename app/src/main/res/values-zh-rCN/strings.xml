@@ -43,5 +43,4 @@
     <string name="about_contact">通讯录选项</string>
     <string name="accept_nvitation_title">自动同意好友请求</string>
     <string name="query_hint_label">Username</string>
-    <string name="button_send">发送</string>
 </resources>

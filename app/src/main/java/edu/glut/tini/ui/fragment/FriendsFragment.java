@@ -27,10 +27,41 @@ import edu.glut.tini.widget.SlideBar;
  */
 public class FriendsFragment extends BaseFragment implements FriendsContract.View {
 
-    private FriendsPresenter friendsPresenter;
+    private static FriendsPresenter friendsPresenter;
     private SlideBar slideBar;
     private TextView slideBar_letter;
     private int olderIndex = 0;
+    static {
+        //联系人监听器
+        EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
+
+            @Override
+            public void onContactAdded(String s) {
+                friendsPresenter.loadFriends();
+            }
+
+            @Override
+            public void onContactDeleted(String s) {
+                friendsPresenter.loadFriends();
+            }
+
+            @Override
+            public void onContactInvited(String s, String s1) {
+
+            }
+
+            @Override
+            public void onFriendRequestAccepted(String s) {
+
+            }
+
+            @Override
+            public void onFriendRequestDeclined(String s) {
+
+            }
+        });
+    }
+
 
     @Override
     protected int setLayoutResourceId() {
@@ -63,35 +94,6 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new FriendsListAdapter(context, friendsPresenter.getFriendsListItems()));
-
-        //联系人监听器
-        EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
-            @Override
-            public void onContactAdded(String s) {
-                friendsPresenter.loadFriends();
-            }
-
-            @Override
-            public void onContactDeleted(String s) {
-                friendsPresenter.loadFriends();
-            }
-
-            @Override
-            public void onContactInvited(String s, String s1) {
-
-            }
-
-            @Override
-            public void onFriendRequestAccepted(String s) {
-
-            }
-
-            @Override
-            public void onFriendRequestDeclined(String s) {
-
-            }
-        });
-
 
         slideBar.setOnTouchLetterChangeListener(new SlideBar.OnTouchLetterChangeListener() {
             @Override
