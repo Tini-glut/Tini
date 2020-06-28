@@ -23,6 +23,11 @@
                 android:icon="@drawable/baseline_qr_code_scanner_black_24"
                 android:title="@string/text_label_add_from_photo"
                 app:showAsAction="always"/>
+            <item
+                android:id="@+id/color_lens"
+                android:icon="@drawable/baseline_color_lens_black_24"
+                android:title="@string/color_lens_label"
+                app:showAsAction="always"/>
         </menu>
 
     </item>

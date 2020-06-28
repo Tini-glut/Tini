@@ -65,4 +65,6 @@
     <string name="cancel">Cencel</string>
     <string name="text_label_add_contact_apply">Contact Apply</string>
     <string name="text_label_add_contact_body_label">%s请求添加您为好友</string>
+    <string name="delete">Delete</string>
+    <string name="color_lens_label">Theme Color</string>
 </resources>
