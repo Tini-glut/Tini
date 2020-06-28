@@ -60,4 +60,5 @@
     <string name="about_contact">About contacts</string>
     <string name="accept_invitation_key" translatable="false">acceptInvitation</string>
     <string name="accept_nvitation_title">Accept Invitation</string>
+    <string name="query_hint_label">Username</string>
 </resources>

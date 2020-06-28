@@ -29,7 +29,7 @@ public interface ContactsDao {
     @Update
     public void update(Contacts contacts);
 
-    @Query("SELECT * FROM Contacts WHERE ContactsFriendUsername LIKE :username")
+    @Query("SELECT * FROM Contacts WHERE ContactsFriendUsername LIKE '%' || :username || '%'")
     public List<Contacts> selectContactsByUsername(String username);
 
     @Query("SELECT * FROM Contacts")
