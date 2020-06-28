@@ -14,7 +14,5 @@ public interface FriendsContract {
         void onLoadFriendsFailed();
 
         void loadFriendsFromDBSuccess();
-
-        void loadFriendsFromDBFailed();
     }
 }

@@ -23,16 +23,23 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <edu.glut.tini.widget.SlideBar
+        android:id="@+id/slideBar"
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        tools:ignore="RtlHardcoded" />
+
     <TextView
-        android:id="@+id/section"
+        android:id="@+id/letter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="18sp"
+        android:textSize="33sp"
         android:textColor="@color/white"
         android:padding="8dp"
-        android:background="@color/bottom_blue"
-        android:visibility="gone"/>
+        android:background="@color/colorPrimary"
+        android:visibility="gone" />
 
 
 </FrameLayout>
