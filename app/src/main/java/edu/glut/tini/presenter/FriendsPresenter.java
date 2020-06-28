@@ -77,7 +77,7 @@ public class FriendsPresenter implements FriendsContract.Presenter {
                 sortFriends(friendsListItems);
                 uiThread(() -> view.loadFriendsFromDBSuccess());
             } else {
-//                uiThread(() -> view.loadFriendsFromDBFailed());
+                //如果本地数据库为空  则联网查询好友
                 loadFriends();
             }
 
@@ -88,7 +88,7 @@ public class FriendsPresenter implements FriendsContract.Presenter {
     /**
      * 按首字母排序 并且 根据确定是否显示首字母
      *
-     * @param friendsListItems
+     * @param friendsListItems 准备要排序的
      */
     void sortFriends(List<FriendsListItem> friendsListItems) {
         friendsListItems.sort((o1, o2) -> o1.getUserName().compareTo(o2.getUserName()));
@@ -101,6 +101,11 @@ public class FriendsPresenter implements FriendsContract.Presenter {
         }
     }
 
+    /**
+     * 保存好友列表信息到本地数据库
+     * @param friendsListItems
+     * @param context
+     */
     void saveFriendsIntoDb(List<FriendsListItem> friendsListItems, Context context) {
 
         ContactsDao contactsDao = AppDatabase.getInstance(context).getContactsDao();
