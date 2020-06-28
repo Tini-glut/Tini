@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.adapter.EMAChatClient;
@@ -19,6 +20,7 @@ import com.hyphenate.chat.adapter.EMAChatClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.glut.tini.R;
 import edu.glut.tini.data.item.FriendsListItem;
 import edu.glut.tini.ui.activity.ChatActivity;
 import edu.glut.tini.widget.FriendsListItemView;
@@ -59,14 +61,15 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         });
         //长按事件
         friendsListItemView.setOnLongClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
             builder.setTitle("删除好友")
                     .setMessage("你确定要删除此好友吗")
-                    .setNegativeButton("NO", null)
-                    .setPositiveButton("YES", (dialog, which) -> {
+                    .setNegativeButton(context.getString(R.string.cancel),null)
+                    .setPositiveButton(context.getString(R.string.delete),(dialog, which) -> {
                         delFriend(friendsListItems.get(position).getUserName());
-                    })
-                    .show();
+                    });
+            builder.show();
+
             return true;
         });
     }
@@ -108,5 +111,10 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public FriendsListItemViewHolder(@NonNull View itemView) {
             super(itemView);
         }
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return  position;
     }
 }

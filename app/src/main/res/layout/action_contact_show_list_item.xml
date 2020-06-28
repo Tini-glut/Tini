@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
+    android:theme="@style/Theme.AppCompat.DayNight"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:elevation="@dimen/card_elevation"
     android:layout_margin="@dimen/margin"

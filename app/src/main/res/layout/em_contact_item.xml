@@ -23,8 +23,9 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="@dimen/card_elevation"
             app:cardUseCompatPadding="true"
-            android:layout_marginBottom="7dp"
+            android:layout_margin="@dimen/margin"
             android:foregroundGravity="clip_horizontal"
             app:cardCornerRadius="10dp"
             >
@@ -40,7 +41,7 @@
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:src="@mipmap/logo"/>
+                android:src="@mipmap/ic_launcher_round"/>
 
             <TextView
                 android:id="@+id/userName"
