@@ -109,4 +109,9 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             super(itemView);
         }
     }
+
+    @Override
+    public long getItemId(int position) {
+        return  position;
+    }
 }

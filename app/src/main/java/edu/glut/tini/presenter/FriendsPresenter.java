@@ -38,9 +38,10 @@ public class FriendsPresenter implements FriendsContract.Presenter {
      */
     @Override
     public void loadFriends() {
+        friendsListItems.clear();
+
         Thread t = new Thread(() -> {
             try {
-                friendsListItems.clear();
                 userList = EMClient.getInstance().contactManager().getAllContactsFromServer();
                 for (String s : userList) {
                     friendsListItems.add(new FriendsListItem(s, s.toUpperCase().charAt(0), false));
@@ -64,6 +65,8 @@ public class FriendsPresenter implements FriendsContract.Presenter {
      */
     @Override
     public void loadFriendsFromDB() {
+
+        friendsListItems.clear();
         Thread thread = new Thread(() -> {
             ContactsDao contactsDao = AppDatabase.getInstance(context).getContactsDao();
             List<Contacts> contacts = contactsDao.selectAll();
