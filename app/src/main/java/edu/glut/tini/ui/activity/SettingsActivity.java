@@ -8,20 +8,26 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import edu.glut.tini.R;
 
-public class Settings2Activity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
+    public void init() {
+        super.init();
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.settings, new SettingsFragment())
+                .replace(R.id.frame_settings, new SettingsFragment())
                 .commit();
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    @Override
+    public int getLayoutResourceId() {
+        return R.layout.settings_activity;
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {

@@ -1,11 +1,6 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory app:title="@string/push_notification_title">
-        <SwitchPreferenceCompat
-            app:defaultValue="false"
-            app:key="@string/push_notification_key"
-            app:title="@string/do_not_Disturb" />
-
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/about_contact">
@@ -47,6 +42,10 @@
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <PreferenceCategory app:title="@string/messages_header">
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="@string/push_notification_key"
+            app:title="@string/do_not_Disturb" />
 
         <EditTextPreference
             app:key="signature"
