@@ -1,9 +1,18 @@
 package edu.glut.tini.ui.fragment;
 
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -121,7 +130,7 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
         int i = 0;
         List<FriendsListItem> friendsListItems = friendsPresenter.getFriendsListItems();
         for (; i < friendsListItems.size(); i++) {
-            if (friendsListItems.get(i).getFirstLetter() == letter.charAt(0)) {
+            if (friendsListItems.get(i).getFirstLetter() == letter.toUpperCase().charAt(0)) {
 //                System.out.println("里面的i:" + i);
                 olderIndex = i;
                 return i;
@@ -165,5 +174,26 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
 
     }
 
-    private  void sendNotification(String username) {}
+    //发送好友通知
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void sendNotification(String username) {
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        CharSequence title = getString(R.string.app_name);
+        String description = username + "添加您至他（她）的通讯录";
+        NotificationChannel notificationChannel =
+                new NotificationChannel(CHANNEL_ID+"", title, NotificationManager.IMPORTANCE_HIGH);
+        notificationChannel.setDescription(description);
+        notificationChannel.enableVibration(true);
+        notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 100});
+        if (manager != null)
+            manager.createNotificationChannel(notificationChannel);
+        Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID+"")
+                .setContentTitle("标题")
+                .setContentText("内容666666666666666666666666666")
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                .build();
+        manager.notify(1, notification);
+    }
 }

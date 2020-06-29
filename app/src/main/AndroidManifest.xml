@@ -31,7 +31,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.AddContactActivity"/>
+        <activity android:name=".ui.activity.AboutActivity"
+            android:label="@string/about"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.Setting"/>
+        <activity
+            android:name=".ui.activity.SettingsActivity"
+            android:label="@string/Setting"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.Setting" />
+        <activity android:name=".ui.activity.AddContactActivity" />
         <activity
             android:name=".ui.activity.LoginActivity"
             android:theme="@style/AppTheme.FullScreen" />
@@ -78,8 +87,7 @@
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="edu.glut.tini.BmobContentProvider">
-        </provider>
+            android:authorities="edu.glut.tini.BmobContentProvider" />
     </application>
 
 </manifest>
