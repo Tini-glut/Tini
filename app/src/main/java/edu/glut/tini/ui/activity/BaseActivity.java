@@ -9,6 +9,8 @@ import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.glut.tini.R;
+import edu.glut.tini.utils.StatusBarUtils;
 
 
 /**
@@ -23,6 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResourceId());
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.colorPrimary));
         init();
     }
 

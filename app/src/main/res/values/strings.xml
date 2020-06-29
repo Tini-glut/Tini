@@ -67,5 +67,16 @@
     <string name="text_label_add_contact_body_label">%s请求添加您为好友</string>
     <string name="delete">Delete</string>
     <string name="color_lens_label">Theme Color</string>
+    <string name="description">桂林理工大学是中央与地方共建、以广西壮族自治区管理为主的高校。学校源于1956年原国家重工业部在广西组建的桂林地质学校，历经五改归属、十易校名的发展历程，其中，1978年更名为桂林冶金地质学院，1993年更名为桂林工学院，2009年正式更名为桂林理工大学。</string>
+    <string name="label_dynamic">Dynamic</string>
+    <string name="label_game">Game</string>
+    <string name="label_music">Music</string>
+    <string name="label_read">Read</string>
+    <string name="label_sport">Sprots</string>
+    <string name="Setting">Setting</string>
+    <string name="about">About</string>
+    <string name="copy_right">Copyrights © %1$d</string>
     <string name="button_send">Send</string>
+    <string name="sync_header">Sync</string>
+    <string name="sync_title">Sync</string>
 </resources>
