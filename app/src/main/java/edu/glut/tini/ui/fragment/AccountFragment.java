@@ -1,22 +1,26 @@
 package edu.glut.tini.ui.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
-
-
 import edu.glut.tini.R;
 import edu.glut.tini.ui.MainActivity;
 import edu.glut.tini.ui.activity.AboutActivity;
 import edu.glut.tini.ui.activity.LoginActivity;
 import edu.glut.tini.ui.activity.SettingsActivity;
+import edu.glut.tini.utils.QRCodeUtils;
 
 /**
  *
@@ -29,6 +33,7 @@ public class AccountFragment extends BaseFragment {
     private ImageView ivAvatar;
     private Button btnLogout;
     private View setting, dynamic, game, music, sports, about, read;
+    private ImageView QRCode;
 
     @Override
     protected int setLayoutResourceId() {
@@ -49,6 +54,7 @@ public class AccountFragment extends BaseFragment {
         about = mRootView.findViewById(R.id.about);
         sports = mRootView.findViewById(R.id.sports);
         read = mRootView.findViewById(R.id.read);
+        QRCode = mRootView.findViewById(R.id.icon_qr_code);
 
         setting.setOnClickListener(this::setting);
         btnLogout.setOnClickListener(this::logout);
@@ -58,9 +64,18 @@ public class AccountFragment extends BaseFragment {
         game.setOnClickListener(this::game);
         sports.setOnClickListener(this::sports);
 
+
+        QRCode.setOnClickListener(this::generationQRCode);
+
         MainActivity.getMaterialToolbar().setTitle(getString(R.string.text_label_account));
         initCurrentUserInfo();
 
+    }
+
+    private void generationQRCode(View view) {
+        String username = EMClient.getInstance().getCurrentUser();
+        Bitmap qrCodeBitmap = QRCodeUtils.createQRCodeBitmap(username, 300, 500);
+        imgMax(qrCodeBitmap);
     }
 
     private void sports(View view) {
@@ -127,6 +142,27 @@ public class AccountFragment extends BaseFragment {
 
             @Override
             public void onError(int code, String message) {
+            }
+        });
+    }
+
+    public void imgMax(Bitmap bitmap) {
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View imgEntryView = inflater.inflate(R.layout.show_qr_code, null);
+        // 加载自定义的布局文件
+        AlertDialog alertDialog = new MaterialAlertDialogBuilder(context).create();
+
+        ImageView img = (ImageView) imgEntryView.findViewById(R.id.large_image);
+        img.setImageBitmap(bitmap);
+        // 这个是加载网络图片的，可以是自己的图片设置方法
+        // imageDownloader.download(imageBmList.get(0),img);
+        alertDialog.setView(imgEntryView); // 自定义dialog
+        alertDialog.show();
+        // 点击布局文件（也可以理解为点击大图）后关闭dialog，这里的dialog不需要按钮
+        imgEntryView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View paramView) {
+                alertDialog.cancel();
             }
         });
     }
