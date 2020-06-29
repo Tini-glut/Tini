@@ -14,11 +14,13 @@ import androidx.annotation.Nullable;
 public class SlideBar extends View {
 
 
+    //字母高度
     private float letterHeight;
     private float textSize = 43.0f;
     private Paint paint = new Paint();
     private float baseHeight;
-
+    //需要改变颜色的位置
+    private int index;
     //字母改变监听
     private OnTouchLetterChangeListener onTouchLetterChangeListener;
 
@@ -59,9 +61,19 @@ public class SlideBar extends View {
 
         float x = getWidth() / 2.0f;
         float y = baseHeight;
-        for (String letter : LETTERS) {
+       /* for (String letter : LETTERS) {
             canvas.drawText(letter, x, y, paint);
             y += letterHeight;
+        }*/
+
+        for (int i = 0; i < LETTERS.length; i++) {
+            initPaint();
+            if (i==index){
+                paint.setColor(Color.RED);
+            }
+            canvas.drawText(LETTERS[i], x, y, paint);
+            y+=letterHeight;
+            paint.reset();
         }
     }
 
@@ -71,9 +83,9 @@ public class SlideBar extends View {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
                 setBackgroundColor(Color.parseColor("#CCCCCC"));
-                int index = getTouchIndex(event);
+                 index = getTouchIndex(event);
                 String letter = LETTERS[index];
-                System.out.println(letter);
+//                System.out.println(letter);
                 if (onTouchLetterChangeListener != null) {
                     onTouchLetterChangeListener.onTouchLetterChange(letter);
                 }
