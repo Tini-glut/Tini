@@ -32,12 +32,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.activity.AboutActivity"
-            android:label="@string/title_activity_about"
+            android:label="@string/about"
             android:parentActivityName=".ui.MainActivity"
             android:theme="@style/AppTheme.Setting"/>
         <activity
             android:name=".ui.activity.SettingsActivity"
-            android:label="@string/title_activity_settings2"
+            android:label="@string/Setting"
             android:parentActivityName=".ui.MainActivity"
             android:theme="@style/AppTheme.Setting" />
         <activity android:name=".ui.activity.AddContactActivity" />
