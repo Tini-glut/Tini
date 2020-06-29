@@ -4,7 +4,6 @@ package edu.glut.tini.ui.fragment;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -27,6 +26,7 @@ import edu.glut.tini.widget.SlideBar;
  */
 public class FriendsFragment extends BaseFragment implements FriendsContract.View {
 
+    private static final int CHANNEL_ID = 3435325;
     private static FriendsPresenter friendsPresenter;
     private SlideBar slideBar;
     private TextView slideBar_letter;
@@ -165,4 +165,5 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
 
     }
 
+    private  void sendNotification(String username) {}
 }

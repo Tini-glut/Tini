@@ -36,13 +36,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
 
     private boolean onDarkModeSelectPreferenceChange(Preference preference, Object newValue) {
-        Log.e("preference", "Pending Preference value is: " + newValue);
+
         return true;
     }
 
     private boolean onDarkModePreferenceChange(Preference preference, Object newValue) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        Log.e("preference", "Pending Preference value is: " + newValue);
 
         return true;
     }

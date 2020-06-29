@@ -15,7 +15,7 @@
         android:id="@+id/imageView"
         android:layout_width="149dp"
         android:layout_height="152dp"
-        android:src="@mipmap/logo"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -22,7 +22,7 @@
 
         <SwitchPreferenceCompat
             app:key="@string/remember_password_key"
-            app:defaultValue="false"
+            app:defaultValue="true"
             app:title="@string/login_title" />
 
         <SwitchPreferenceCompat
