@@ -64,7 +64,6 @@ public class AddContactActivity extends BaseActivity implements AddContactsContr
     @Override
     public void onAddContactsSuccess() {
         searchResultRecyclerView.getAdapter().notifyDataSetChanged();
-
     }
 
     @Override

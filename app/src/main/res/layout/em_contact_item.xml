@@ -2,7 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,31 +15,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/first_letter"
-            android:paddingLeft="10dp"
+            android:paddingStart="@dimen/padding"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
+            tools:text="A"
             android:textAllCaps="true" />
 
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="68dp"
             android:elevation="@dimen/card_elevation"
             app:cardUseCompatPadding="true"
             android:layout_margin="@dimen/margin"
             android:foregroundGravity="clip_horizontal"
-            app:cardCornerRadius="10dp"
             >
 
         <LinearLayout
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:focusable="true">
 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:paddingLeft="10dp"
+                android:layout_width="@dimen/image_avatar"
+                android:layout_height="@dimen/image_avatar"
+                android:paddingStart="@dimen/padding"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 android:src="@mipmap/ic_launcher_round"/>
@@ -48,8 +51,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:text="zhangsan" />
+                android:layout_marginStart="@dimen/icon_textview_margin"
+                android:textSize="@dimen/input_label"
+                style="@style/TextAppearance.AppCompat.Body2"
+                tools:text="Admin" />
 
 
         </LinearLayout>
