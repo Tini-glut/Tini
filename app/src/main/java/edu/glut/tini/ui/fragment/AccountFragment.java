@@ -41,7 +41,7 @@ public class AccountFragment extends BaseFragment {
         MainActivity.getMaterialToolbar().setTitle(getString(R.string.text_label_account));
         initCurrentUserInfo();
 
-        initSetting();
+        //initSetting();
     }
 
     /*

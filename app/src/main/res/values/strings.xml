@@ -67,4 +67,16 @@
     <string name="text_label_add_contact_body_label">%s请求添加您为好友</string>
     <string name="delete">Delete</string>
     <string name="color_lens_label">Theme Color</string>
+    <string name="title_activity_settings2">Settings2Activity</string>
+    <string name="sync_header" translatable="false">Sync</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title" translatable="false">Sync email periodically</string>
+    <string name="Setting">设置</string>
+    <string name="label_dynamic">动态</string>
+    <string name="label_game">Game</string>
+    <string name="label_music">Music</string>
+    <string name="label_read">Read</string>
+    <string name="label_sport">Sports</string>
+    <string name="about">About</string>
 </resources>
