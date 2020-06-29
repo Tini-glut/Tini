@@ -14,9 +14,11 @@
     <include layout="@layout/chat_header" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chat_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:scrollbarAlwaysDrawVerticalTrack="true"/>
 
     <View
         android:layout_width="match_parent"
@@ -44,8 +46,9 @@
             android:background="@drawable/btn_send"
             android:enabled="false"
             android:text="@string/button_send"
-            android:textColor="#000000"
-            android:textSize="15sp" />
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:layout_marginRight="8dp"/>
 
     </LinearLayout>
 
