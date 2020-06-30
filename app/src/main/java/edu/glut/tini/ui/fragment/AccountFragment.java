@@ -78,7 +78,7 @@ public class AccountFragment extends BaseFragment {
         builder.setTitle("注销登录")
                 .setMessage("你确定要注销登录吗？")
                 .setNegativeButton(context.getString(R.string.cancel),null)
-                .setPositiveButton(context.getString(R.string.delete),(dialog, which) -> {
+                .setPositiveButton(context.getString(android.R.string.yes),(dialog, which) -> {
                     logoutFromServ();
                 });
         builder.show();

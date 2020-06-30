@@ -65,7 +65,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             builder.setTitle("删除好友")
                     .setMessage("你确定要删除此好友吗")
                     .setNegativeButton(context.getString(R.string.cancel),null)
-                    .setPositiveButton(context.getString(R.string.delete),(dialog, which) -> {
+                    .setPositiveButton(context.getString(android.R.string.yes),(dialog, which) -> {
                         delFriend(friendsListItems.get(position).getUserName());
                     });
             builder.show();
