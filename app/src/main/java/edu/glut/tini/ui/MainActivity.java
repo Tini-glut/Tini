@@ -89,7 +89,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 List<Contacts> data  = mainPresenter.search(query);
-                Log.d(this.toString(), "onQueryTextChange: "+ data.get(0).getContactsFriendUsername());
 
                 searchView.clearFocus();
                 return true;

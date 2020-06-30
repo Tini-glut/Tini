@@ -9,12 +9,19 @@
 
     <include layout="@layout/chat_header" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chat_recyclerview"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/chat_swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scrollbarAlwaysDrawVerticalTrack="true"/>
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chat_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbarAlwaysDrawVerticalTrack="true" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <View
         android:layout_width="match_parent"
