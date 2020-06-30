@@ -4,22 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import edu.glut.tini.ui.activity.ChatActivity;
 import edu.glut.tini.widget.ConversationListItemView;
 
 public class ConversationListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private List<EMConversation> conversations = new ArrayList<>();
+    private List<EMConversation> conversations;
     public ConversationListAdapter(Context context, List<EMConversation> conversations){
         this.context = context;
         this.conversations=conversations;
@@ -37,7 +34,11 @@ public class ConversationListAdapter extends RecyclerView.Adapter<RecyclerView.V
         conversationListItemView.bindView(conversations.get(position));
         conversationListItemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChatActivity.class);
-            intent.putExtra("userName", conversations.get(position).conversationId());
+            String username = conversations.get(position).conversationId();
+
+            EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
+            conversation.markAllMessagesAsRead();
+            intent.putExtra("userName", username);
             context.startActivity(intent);
         });
 

@@ -41,7 +41,7 @@ public class ConversationFragment extends BaseFragment {
     @Override
     protected void init() {
         super.init();
-        //MainActivity.getMaterialToolbar().setTitle(getString(R.string.text_label_conversation));
+        MainActivity.getMaterialToolbar().setTitle(getString(R.string.text_label_conversation));
         recyclerView = mRootView.findViewById(R.id.conversation_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -73,6 +73,7 @@ public class ConversationFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        conversations.clear();
         loadConversations();
 
     }
