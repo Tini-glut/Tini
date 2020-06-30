@@ -61,7 +61,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             SendMessageItemView sendMessageItemView = (SendMessageItemView) holder.itemView;
             sendMessageItemView.bindView(emMessageList.get(position));
         }else {
-
+            RecMessageItemView recMessageItemView =(RecMessageItemView) holder.itemView;
+            recMessageItemView.bindView(emMessageList.get(position));
         }
     }
 

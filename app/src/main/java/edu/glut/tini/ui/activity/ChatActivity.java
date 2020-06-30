@@ -10,14 +10,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.UiThread;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hyphenate.EMMessageListener;
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 
 import java.util.List;
 
 import edu.glut.tini.R;
+import edu.glut.tini.adapter.EMMessageListenerAdapter;
 import edu.glut.tini.adapter.MessageListAdapter;
 import edu.glut.tini.contract.ChatContract;
 import edu.glut.tini.presenter.ChatPresenter;
@@ -34,20 +38,36 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     private Button btn_send;
     private RecyclerView recyclerView;
     private ChatPresenter chatPresenter = new ChatPresenter(this);
-
     private String userName;
+    private LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+    private EMMessageListener emMessageListener = new EMMessageListenerAdapter(){
+        @Override
+        public void onMessageReceived(List<EMMessage> list) {
+            super.onMessageReceived(list);
+            chatPresenter.addMessage(userName,list);
+            runOnUiThread(() -> {
+                recyclerView.getAdapter().notifyDataSetChanged();
+                scrollToBottom();
+            });
+        }
+    };
 
     @Override
     public void init() {
         super.init();
         recyclerView = findViewById(R.id.chat_recyclerview);
+        linearLayoutManager.setReverseLayout(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
         back = findViewById(R.id.chat_back);
         chatTitle = findViewById(R.id.chat_title);
         textEdit = findViewById(R.id.chat_edit);
         btn_send = findViewById(R.id.btn_send);
-
+        EMClient.getInstance().chatManager().addMessageListener(emMessageListener);
         userName = getIntent().getStringExtra("userName");
         System.out.println("ChatActivity :  "+userName);
+        recyclerView.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+            recyclerView.scrollToPosition(chatPresenter.getMessages().size()-1);
+        });
 
         //聊天界面左上角返回键监听事件
         back.setOnClickListener(v -> {
@@ -110,13 +130,21 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
+
     @Override
     public void onSendMessageSuccess() {
 
         recyclerView.getAdapter().notifyDataSetChanged();
         Toast.makeText(this, "发送成功", Toast.LENGTH_SHORT).show();
         textEdit.getText().clear();
+        System.out.println(chatPresenter.getMessages().size());
+        scrollToBottom();
 
+    }
+
+
+    private void scrollToBottom() {
+        recyclerView.scrollToPosition(chatPresenter.getMessages().size()-1);
     }
 
     @Override

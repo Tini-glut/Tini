@@ -33,7 +33,6 @@ public class ChatPresenter implements ChatContract.Presenter {
         emMessage.setMessageStatusCallback(new EMCallBack() {
             @Override
             public void onSuccess() {
-
                 uiThread(() -> {
                     messages.add(emMessage);
                     view.onSendMessageSuccess();
@@ -51,5 +50,11 @@ public class ChatPresenter implements ChatContract.Presenter {
         view.onStartSendMessage();
         EMClient.getInstance().chatManager().sendMessage(emMessage);
 
+    }
+
+    @Override
+    public void addMessage(String userName, List<EMMessage> list) {
+        messages.addAll(list);
+        EMClient.getInstance().chatManager().getConversation(userName).markAllMessagesAsRead();
     }
 }

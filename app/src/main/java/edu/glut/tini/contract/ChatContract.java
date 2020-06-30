@@ -1,5 +1,9 @@
 package edu.glut.tini.contract;
 
+import com.hyphenate.chat.EMMessage;
+
+import java.util.List;
+
 import edu.glut.tini.presenter.BasePresenter;
 
 /**
@@ -10,6 +14,8 @@ public interface ChatContract {
     interface Presenter extends BasePresenter{
 
         void sendMessage(String contact,String message);
+
+        void addMessage(String userName, List<EMMessage> list);
     }
 
     interface View{
