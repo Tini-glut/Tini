@@ -19,4 +19,6 @@
     <dimen name="chat_header_text">22sp</dimen>
     <dimen name="icon_textview_margin">24dp</dimen>
     <dimen name="layout_margin">16dp</dimen>
+    <dimen name="icon_button">35dp</dimen>
+    <dimen name="text_msg">18sp</dimen>
 </resources>

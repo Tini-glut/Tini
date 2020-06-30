@@ -2,6 +2,7 @@ package edu.glut.tini.ui.activity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,6 +24,8 @@ import edu.glut.tini.adapter.MessageListAdapter;
 import edu.glut.tini.contract.ChatContract;
 import edu.glut.tini.presenter.ChatPresenter;
 
+import static android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE;
+
 public class ChatActivity extends BaseActivity implements ChatContract.View {
     @Override
     public int getLayoutResourceId() {
@@ -32,7 +35,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     private ImageView chat_back;
     private TextView chatTitle;
     private EditText textEdit;
-    private Button btn_send;
+    private ImageView btn_send;
     private RecyclerView recyclerView;
     private ChatPresenter chatPresenter = new ChatPresenter(this);
     private String userName;
@@ -58,6 +61,17 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         chat_back = findViewById(R.id.chat_back);
         chatTitle = findViewById(R.id.chat_title);
         textEdit = findViewById(R.id.chat_edit);
+
+
+        textEdit.setImeOptions(EditorInfo.IME_ACTION_SEND);
+
+        textEdit.setInputType(TYPE_TEXT_FLAG_MULTI_LINE);
+
+        textEdit.setSingleLine(false);
+
+        textEdit.setMaxLines(4);
+
+
         btn_send = findViewById(R.id.btn_send);
 
         //聊天信息监听
@@ -81,8 +95,10 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
 
         //点击发送按钮的监听事件
         btn_send.setOnClickListener(v -> {
+            String message = textEdit.getText().toString();
+            if (message.isEmpty()) return;
             hideSoftKeyboard();
-            chatPresenter.sendMessage(userName, textEdit.getText().toString());
+            chatPresenter.sendMessage(userName, message);
         });
 
         //初始化聊天记录的加载
