@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:theme="@style/Theme.AppCompat.DayNight"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:elevation="@dimen/card_elevation"
+    android:layout_margin="@dimen/margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/image_avatar"
+            android:layout_height="@dimen/image_avatar"
+            android:layout_margin="@dimen/margin"
+            android:src="@mipmap/logo"/>
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/image_avatar"
+            android:layout_margin="@dimen/margin"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/list_label_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:text="Admin"
+                />
+            <TextView
+                android:id="@+id/list_label_username_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_margin="@dimen/margin"
+                android:text="2019-2-4"
+                android:textColor="?android:attr/textColorSecondary"
+                />
+
+
+
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/timesamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/divider"
+            android:text="17:47"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            />
+
+        <TextView
+            android:id="@+id/unreadCount"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignBottom="@+id/avatar"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/abc_vector_test"
+            android:gravity="center"
+            android:padding="2dp"
+
+            android:text="20"
+            android:textColor="@color/swipe_refresh"
+            android:textSize="10sp" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
