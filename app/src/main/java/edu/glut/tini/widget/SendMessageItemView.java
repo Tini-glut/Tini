@@ -7,11 +7,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMMessageBody;
 import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.util.DateUtils;
 
-import org.w3c.dom.Text;
 
 import java.util.Date;
 
@@ -27,8 +25,9 @@ public class SendMessageItemView extends RelativeLayout {
         View.inflate(context, R.layout.send_msg_item, this);
     }
 
-    public void bindView(EMMessage emMessage) {
-        updateTimeStamp(emMessage);
+    public void bindView(EMMessage emMessage, Boolean showTimeStamp) {
+
+        updateTimeStamp(emMessage,showTimeStamp);
         updateMessage(emMessage);
     }
 
@@ -47,10 +46,16 @@ public class SendMessageItemView extends RelativeLayout {
      * 绑定时间
      *
      * @param emMessage
+     * @param showTimeStamp
      */
-    private void updateTimeStamp(EMMessage emMessage) {
+    private void updateTimeStamp(EMMessage emMessage, Boolean showTimeStamp) {
         TextView sendTime = findViewById(R.id.sendTime);
+        if (showTimeStamp){
+            sendTime.setVisibility(VISIBLE);
         String timestampString = DateUtils.getTimestampString(new Date(emMessage.getMsgTime()));
         sendTime.setText(timestampString);
+        }else {
+            sendTime.setVisibility(GONE);
+        }
     }
 }

@@ -21,33 +21,40 @@ import edu.glut.tini.R;
 public class RecMessageItemView extends RelativeLayout {
     public RecMessageItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        View.inflate(context, R.layout.receive_msg_item,this);
+        View.inflate(context, R.layout.receive_msg_item, this);
     }
 
-    public void bindView(EMMessage emMessage) {
+    public void bindView(EMMessage emMessage, Boolean showTimeStamp) {
         updateMessage(emMessage);
-        updateTimeStamp(emMessage);
+        updateTimeStamp(emMessage, showTimeStamp);
     }
 
     private void updateMessage(EMMessage emMessage) {
-        TextView receiveMsg= findViewById(R.id.receiveMsg);
-        if (emMessage.getType() == EMMessage.Type.TXT){
+        TextView receiveMsg = findViewById(R.id.receiveMsg);
+        if (emMessage.getType() == EMMessage.Type.TXT) {
             EMTextMessageBody body = (EMTextMessageBody) emMessage.getBody();
             receiveMsg.setText(body.getMessage());
 
-        }else {
+        } else {
             receiveMsg.setText("暂不支持非文本消息");
-
         }
     }
+
     /**
      * 绑定时间
      *
      * @param emMessage
+     * @param showTimeStamp
      */
-    private void updateTimeStamp(EMMessage emMessage) {
+    private void updateTimeStamp(EMMessage emMessage, Boolean showTimeStamp) {
         TextView receiveTime = findViewById(R.id.receiveTime);
-        String timestampString = DateUtils.getTimestampString(new Date(emMessage.getMsgTime()));
-        receiveTime.setText(timestampString);
+
+        if (showTimeStamp) {
+            receiveTime.setVisibility(VISIBLE);
+            String timestampString = DateUtils.getTimestampString(new Date(emMessage.getMsgTime()));
+            receiveTime.setText(timestampString);
+        } else {
+            receiveTime.setVisibility(GONE);
+        }
     }
 }

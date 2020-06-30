@@ -8,10 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.util.DateUtils;
 
 import java.util.List;
 
-import edu.glut.tini.ui.activity.ChatActivity;
 import edu.glut.tini.widget.RecMessageItemView;
 import edu.glut.tini.widget.SendMessageItemView;
 
@@ -57,13 +57,23 @@ public class MessageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        Boolean showTimeStamp = isShowTimeStamp(position);
         if (getItemViewType(position)==ITEM_TYPE_SEND_MESSAGE){
             SendMessageItemView sendMessageItemView = (SendMessageItemView) holder.itemView;
-            sendMessageItemView.bindView(emMessageList.get(position));
+            sendMessageItemView.bindView(emMessageList.get(position),showTimeStamp);
         }else {
             RecMessageItemView recMessageItemView =(RecMessageItemView) holder.itemView;
-            recMessageItemView.bindView(emMessageList.get(position));
+            recMessageItemView.bindView(emMessageList.get(position),showTimeStamp);
         }
+    }
+
+    private Boolean isShowTimeStamp(int position) {
+        boolean showTimeStamp =true;
+        if(position>0){
+            showTimeStamp = !DateUtils.isCloseEnough(emMessageList.get(position).getMsgTime(),
+                    emMessageList.get(position-1).getMsgTime());
+        }
+        return showTimeStamp;
     }
 
     @Override
