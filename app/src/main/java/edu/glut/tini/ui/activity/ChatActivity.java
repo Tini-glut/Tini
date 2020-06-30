@@ -1,18 +1,16 @@
 package edu.glut.tini.ui.activity;
 
-import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
@@ -37,12 +35,13 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     private ImageView chat_back;
     private TextView chatTitle;
     private EditText textEdit;
-    private Button btn_send;
+    private ImageView btn_send;
     private RecyclerView recyclerView;
     private ChatPresenter chatPresenter = new ChatPresenter(this);
     private String userName;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
-    private Context context;
+
     private EMMessageListener emMessageListener = new EMMessageListenerAdapter() {
 
         //收到消息
@@ -65,8 +64,8 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         chat_back = findViewById(R.id.chat_back);
         chatTitle = findViewById(R.id.chat_title);
         textEdit = findViewById(R.id.chat_edit);
-
-
+        swipeRefreshLayout = findViewById(R.id.chat_swipe_refresh_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         textEdit.setImeOptions(EditorInfo.IME_ACTION_SEND);
 
         textEdit.setInputType(TYPE_TEXT_FLAG_MULTI_LINE);
@@ -76,8 +75,13 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         textEdit.setMaxLines(4);
 
 
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            chatPresenter.loadMoreMessages(userName);
+        });
+
+
         btn_send = findViewById(R.id.btn_send);
-        context = this;
+
 
         //聊天信息监听
         EMClient.getInstance().chatManager().addMessageListener(emMessageListener);
@@ -117,34 +121,16 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     private void initRecyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+
         //打开软键盘时 recyclerview滚动到底部
         recyclerView.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
             recyclerView.scrollToPosition(chatPresenter.getMessages().size() - 1);
         });
+
         recyclerView.setAdapter(new MessageListAdapter(this, chatPresenter.getMessages()));
 
-        //下拉加载更多聊天记录
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context);
-                Log.d("addOnScrollListener", "ahahhhah");
-                Log.d("newState   ", String.valueOf(newState));
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    //  如果第一个可见条目位置等于0  则现在是最顶部
-                    Log.d("newState == RecyclerView.SCROLL_STATE_IDLE","newState == RecyclerView.SCROLL_STATE_IDLE");
-                    Log.d("onScrollStateChanged", "onScrollStateChanged: "+
-                            String.valueOf(linearLayoutManager1.findFirstVisibleItemPosition()));
-                    if (linearLayoutManager1.findFirstVisibleItemPosition() == -1) {
-                        Log.d("linearLayoutManager1.findFirstVisibleItemPosition() == 0",
-                                "linearLayoutManager1.findFirstVisibleItemPosition() == 0");
-                        chatPresenter.loadMoreMessages(userName);
-                    }
-                }
-            }
-        });
     }
+
 
     /**
      * 初始化输入框
@@ -152,7 +138,6 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
      * @param textEdit
      */
     private void initEditText(EditText textEdit) {
-        btn_send = findViewById(R.id.btn_send);
         textEdit.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -188,7 +173,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     @Override
     public void onSendMessageSuccess() {
         recyclerView.getAdapter().notifyDataSetChanged();
-        Toast.makeText(this, "发送成功", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "发送成功", Toast.LENGTH_SHORT).show();
         textEdit.getText().clear();
         System.out.println(chatPresenter.getMessages().size());
         scrollToBottom();
@@ -216,9 +201,24 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         scrollToBottom();
     }
 
+
+
     @Override
     public void onLoadedMoreMessages(int size) {
+        swipeRefreshLayout.setRefreshing(false);
         recyclerView.getAdapter().notifyDataSetChanged();
         recyclerView.scrollToPosition(size);
+    }
+
+
+    @Override
+    public void onLoadedMoreMessagesFailed(int size) {
+        swipeRefreshLayout.setRefreshing(false);
+        recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scrollToPosition(size);
+
+        runOnUiThread(() -> {
+            Toast.makeText(getApplicationContext(),"没有更多消息啦",Toast.LENGTH_SHORT).show();
+        });
     }
 }

@@ -92,11 +92,18 @@ public class ChatPresenter implements ChatContract.Presenter {
 
         new Thread(() -> {
             EMConversation conversation = EMClient.getInstance().chatManager().getConversation(userName);
-            if (conversation!=null){
+            if (conversation != null) {
                 List<EMMessage> list = conversation.loadMoreMsgFromDB(messages.get(0).getMsgId(), PAGE_SIZE);
-                messages.addAll(0,list);
-                uiThread(() -> view.onLoadedMoreMessages(list.size()-1));
+                messages.addAll(0, list);
+                int size = list.size()-1;
+                if (!list.isEmpty()) {
+                    uiThread(() -> view.onLoadedMoreMessages(size));
+                }
+                 else {
+                    uiThread(() -> view.onLoadedMoreMessagesFailed(size));
+                }
             }
+
         }).start();
     }
 }

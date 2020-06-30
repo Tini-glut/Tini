@@ -30,5 +30,7 @@ public interface ChatContract {
         void onLoadedMessages();
 
         void onLoadedMoreMessages(int size);
+
+        void onLoadedMoreMessagesFailed(int size);
     }
 }
