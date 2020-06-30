@@ -18,6 +18,8 @@ public interface ChatContract {
         void addMessage(String userName, List<EMMessage> list);
 
         void loadMessage(String userName);
+
+        void loadMoreMessages(String userName);
     }
 
     interface View{
@@ -25,6 +27,8 @@ public interface ChatContract {
         void onSendMessageSuccess();
         void onSendMessageFailed();
 
-        void onLoadMessages();
+        void onLoadedMessages();
+
+        void onLoadedMoreMessages(int size);
     }
 }

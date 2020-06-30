@@ -1,14 +1,16 @@
 package edu.glut.tini.ui.activity;
 
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.inputmethod.EditorInfo;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,10 +37,12 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     private ImageView chat_back;
     private TextView chatTitle;
     private EditText textEdit;
-    private ImageView btn_send;
+    private Button btn_send;
     private RecyclerView recyclerView;
     private ChatPresenter chatPresenter = new ChatPresenter(this);
     private String userName;
+
+    private Context context;
     private EMMessageListener emMessageListener = new EMMessageListenerAdapter() {
 
         //收到消息
@@ -73,6 +77,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
 
 
         btn_send = findViewById(R.id.btn_send);
+        context = this;
 
         //聊天信息监听
         EMClient.getInstance().chatManager().addMessageListener(emMessageListener);
@@ -98,7 +103,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
             String message = textEdit.getText().toString();
             if (message.isEmpty()) return;
             hideSoftKeyboard();
-            chatPresenter.sendMessage(userName, message);
+            chatPresenter.sendMessage(userName, textEdit.getText().toString());
         });
 
         //初始化聊天记录的加载
@@ -112,12 +117,33 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     private void initRecyclerView() {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         //打开软键盘时 recyclerview滚动到底部
         recyclerView.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
             recyclerView.scrollToPosition(chatPresenter.getMessages().size() - 1);
         });
         recyclerView.setAdapter(new MessageListAdapter(this, chatPresenter.getMessages()));
 
+        //下拉加载更多聊天记录
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context);
+                Log.d("addOnScrollListener", "ahahhhah");
+                Log.d("newState   ", String.valueOf(newState));
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    //  如果第一个可见条目位置等于0  则现在是最顶部
+                    Log.d("newState == RecyclerView.SCROLL_STATE_IDLE","newState == RecyclerView.SCROLL_STATE_IDLE");
+                    Log.d("onScrollStateChanged", "onScrollStateChanged: "+
+                            String.valueOf(linearLayoutManager1.findFirstVisibleItemPosition()));
+                    if (linearLayoutManager1.findFirstVisibleItemPosition() == -1) {
+                        Log.d("linearLayoutManager1.findFirstVisibleItemPosition() == 0",
+                                "linearLayoutManager1.findFirstVisibleItemPosition() == 0");
+                        chatPresenter.loadMoreMessages(userName);
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -185,8 +211,14 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
 
 
     @Override
-    public void onLoadMessages() {
+    public void onLoadedMessages() {
         recyclerView.getAdapter().notifyDataSetChanged();
         scrollToBottom();
+    }
+
+    @Override
+    public void onLoadedMoreMessages(int size) {
+        recyclerView.getAdapter().notifyDataSetChanged();
+        recyclerView.scrollToPosition(size);
     }
 }

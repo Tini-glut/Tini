@@ -20,6 +20,7 @@ public class ChatPresenter implements ChatContract.Presenter {
 
     private ChatContract.View view;
     private List<EMMessage> messages = new ArrayList<>();
+    private final int PAGE_SIZE = 10;
 
     public List<EMMessage> getMessages() {
         return messages;
@@ -68,21 +69,34 @@ public class ChatPresenter implements ChatContract.Presenter {
             EMConversation conversation = EMClient.getInstance().chatManager().getConversation(userName);
             if (conversation != null) {
                 List<EMMessage> allMessages = conversation.getAllMessages();
-                Log.d(this.getMessages().toString(), String.valueOf(allMessages.size()));
+               /* Log.d(this.getMessages().toString(), String.valueOf(allMessages.size()));
                 String msgId = allMessages.get(0).getMsgId();
                 List<EMMessage> list = conversation.loadMoreMsgFromDB(msgId, conversation.getAllMsgCount());
 //                messages.addAll(list);
                 for (int i = 0; i < list.size(); i++) {
                     messages.add(list.get(i));
-                }
+                }*/
                 messages.addAll(allMessages);
 
             }
             uiThread(() -> {
-                view.onLoadMessages();
+                view.onLoadedMessages();
             });
 
 
+        }).start();
+    }
+
+    @Override
+    public void loadMoreMessages(String userName) {
+
+        new Thread(() -> {
+            EMConversation conversation = EMClient.getInstance().chatManager().getConversation(userName);
+            if (conversation!=null){
+                List<EMMessage> list = conversation.loadMoreMsgFromDB(messages.get(0).getMsgId(), PAGE_SIZE);
+                messages.addAll(0,list);
+                uiThread(() -> view.onLoadedMoreMessages(list.size()-1));
+            }
         }).start();
     }
 }
