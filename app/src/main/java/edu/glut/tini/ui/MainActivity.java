@@ -2,6 +2,8 @@ package edu.glut.tini.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -21,6 +23,10 @@ import androidx.preference.PreferenceManager;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 
 import java.util.List;
 
@@ -107,6 +113,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 startActivity(new Intent(getApplicationContext(), AddContactActivity.class));
                 return true;
             case R.id.qr_code_scanner:
+                scanQRCode();
                 return true;
             default:
                 super.onOptionsItemSelected(item);
@@ -123,5 +130,49 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     public void onSearchFailed() {
 
+    }
+
+    private void scanQRCode() {
+        IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
+        intentIntegrator.initiateScan();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // 获取解析结果
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(this, "取消扫描", Toast.LENGTH_LONG).show();
+            } else {
+                Handler handler = new android.os.Handler(Looper.getMainLooper());
+                String toAddUsername = result.getContents();
+                //Toast.makeText(this, "扫描内容:" + result.getContents(), Toast.LENGTH_LONG).show();
+                EMClient.getInstance()
+                        .contactManager()
+                        .aysncAddContact(toAddUsername, null, new EMCallBack() {
+                            @Override
+                            public void onSuccess() {
+                                handler.post(()->{
+                                    Toast.makeText(getApplicationContext(),"已发送好友请求给"+toAddUsername,Toast.LENGTH_LONG).show();
+                                });
+                            }
+
+                            @Override
+                            public void onError(int i, String s) {
+                                handler.post(()->{
+                                    Toast.makeText(getApplicationContext(),"发送好友请求失败",Toast.LENGTH_LONG).show();
+                                });
+                            }
+
+                            @Override
+                            public void onProgress(int i, String s) {
+
+                            }
+                        });
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

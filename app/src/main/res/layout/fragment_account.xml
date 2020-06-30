@@ -26,7 +26,7 @@
                         android:layout_width="@dimen/image_avatar"
                         android:layout_height="@dimen/image_avatar"
                         android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/fragment_layout_margin_left"
+                        android:layout_marginStart="@dimen/layout_margin"
                         app:srcCompat="@mipmap/logo"
                         android:scaleType="centerCrop"
                         />
@@ -55,26 +55,26 @@
                             />
                     </LinearLayout>
 
-                    <Button
-                        android:id="@+id/btn_logout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/icons"
+                    <ImageView
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:id="@+id/icon_qr_code"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/baseline_qr_code_scanner_black_36"
                         android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
-                        android:text="@string/text_label_logout"
-                        android:textSize="@dimen/login_label"
-                        android:textAppearance="?android:attr/textAppearanceLargeInverse"
-                        android:layout_marginStart="@dimen/fragment_layout_margin_left"
-                        android:layout_marginEnd="@dimen/fragment_layout_margin_right"
-                        />
+                        android:layout_marginEnd="24dp"/>
+
+
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             app:cardElevation="@dimen/card_elevation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="8dp">
             <ScrollView
                 android:layout_width="wrap_content"
@@ -363,6 +363,47 @@
                         android:textSize="@dimen/input_label"
                         style="@style/TextAppearance.AppCompat.Body1"
                         android:text="@string/about"/>
+
+                    <ImageView
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/layout_margin"
+                        android:layout_centerVertical="true"
+                        android:layout_width="30dp"
+                        android:src="@drawable/ic_baseline_chevron_right_24"
+                        android:layout_height="30dp"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/layout_margin"
+                    android:layout_marginEnd="@dimen/layout_margin"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/dividerVertical" />
+                <RelativeLayout
+                    android:id="@+id/logout"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="68dp">
+                    <ImageView
+                        android:id="@+id/icon_logout"
+                        android:layout_marginStart="@dimen/layout_margin"
+                        android:layout_centerVertical="true"
+                        android:layout_width="30dp"
+                        android:src="@drawable/ic_log_out"
+                        android:layout_height="30dp"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_toEndOf="@id/icon_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/icon_textview_margin"
+                        android:layout_centerVertical="true"
+                        android:gravity="center"
+                        android:textSize="@dimen/input_label"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:text="@string/text_label_logout"/>
 
                     <ImageView
                         android:layout_alignParentEnd="true"
