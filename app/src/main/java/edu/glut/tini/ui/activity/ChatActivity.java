@@ -85,7 +85,8 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
             chatPresenter.sendMessage(userName, textEdit.getText().toString());
         });
 
-
+        //初始化聊天记录的加载
+        chatPresenter.loadMessage(userName);
     }
 
 
@@ -164,5 +165,12 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         Toast.makeText(this, "发送失败", Toast.LENGTH_SHORT).show();
         recyclerView.getAdapter().notifyDataSetChanged();
 
+    }
+
+
+    @Override
+    public void onLoadMessages() {
+        recyclerView.getAdapter().notifyDataSetChanged();
+        scrollToBottom();
     }
 }

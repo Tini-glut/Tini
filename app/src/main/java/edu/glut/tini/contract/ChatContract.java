@@ -16,11 +16,15 @@ public interface ChatContract {
         void sendMessage(String contact,String message);
 
         void addMessage(String userName, List<EMMessage> list);
+
+        void loadMessage(String userName);
     }
 
     interface View{
         void onStartSendMessage();
         void onSendMessageSuccess();
         void onSendMessageFailed();
+
+        void onLoadMessages();
     }
 }

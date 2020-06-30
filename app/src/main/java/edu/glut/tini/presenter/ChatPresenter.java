@@ -1,7 +1,10 @@
 package edu.glut.tini.presenter;
 
+import android.util.Log;
+
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ public class ChatPresenter implements ChatContract.Presenter {
 
     @Override
     public void sendMessage(String contact, String message) {
-        EMMessage emMessage = EMMessage.createTxtSendMessage(message,contact);
+        EMMessage emMessage = EMMessage.createTxtSendMessage(message, contact);
 
         emMessage.setMessageStatusCallback(new EMCallBack() {
             @Override
@@ -38,6 +41,7 @@ public class ChatPresenter implements ChatContract.Presenter {
                     view.onSendMessageSuccess();
                 });
             }
+
             @Override
             public void onError(int i, String s) {
                 view.onSendMessageFailed();
@@ -56,5 +60,29 @@ public class ChatPresenter implements ChatContract.Presenter {
     public void addMessage(String userName, List<EMMessage> list) {
         messages.addAll(list);
         EMClient.getInstance().chatManager().getConversation(userName).markAllMessagesAsRead();
+    }
+
+    @Override
+    public void loadMessage(String userName) {
+        new Thread(() -> {
+            EMConversation conversation = EMClient.getInstance().chatManager().getConversation(userName);
+            if (conversation != null) {
+                List<EMMessage> allMessages = conversation.getAllMessages();
+                Log.d(this.getMessages().toString(), String.valueOf(allMessages.size()));
+                String msgId = allMessages.get(0).getMsgId();
+                List<EMMessage> list = conversation.loadMoreMsgFromDB(msgId, conversation.getAllMsgCount());
+//                messages.addAll(list);
+                for (int i = 0; i < list.size(); i++) {
+                    messages.add(list.get(i));
+                }
+                messages.addAll(allMessages);
+
+            }
+            uiThread(() -> {
+                view.onLoadMessages();
+            });
+
+
+        }).start();
     }
 }
