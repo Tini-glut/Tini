@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -31,7 +32,7 @@ public class AccountFragment extends BaseFragment {
     private TextView tvUsernameID;
     private TextView tvUsername;
     private ImageView ivAvatar;
-    private Button btnLogout;
+    private View btnLogout;
     private View setting, dynamic, game, music, sports, about, read;
     private ImageView QRCode;
 
@@ -46,7 +47,7 @@ public class AccountFragment extends BaseFragment {
         tvUsername = mRootView.findViewById(R.id.label_username);
         tvUsernameID = mRootView.findViewById(R.id.label_username_id);
         ivAvatar = mRootView.findViewById(R.id.image_avatar);
-        btnLogout = mRootView.findViewById(R.id.btn_logout);
+        btnLogout = mRootView.findViewById(R.id.logout);
         setting = mRootView.findViewById(R.id.settings);
         dynamic = mRootView.findViewById(R.id.dynamic);
         game = mRootView.findViewById(R.id.game);
@@ -70,6 +71,17 @@ public class AccountFragment extends BaseFragment {
         MainActivity.getMaterialToolbar().setTitle(getString(R.string.text_label_account));
         initCurrentUserInfo();
 
+    }
+
+    private void logout(View view) {
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
+        builder.setTitle("注销登录")
+                .setMessage("你确定要注销登录吗？")
+                .setNegativeButton(context.getString(R.string.cancel),null)
+                .setPositiveButton(context.getString(R.string.delete),(dialog, which) -> {
+                    logoutFromServ();
+                });
+        builder.show();
     }
 
     private void generationQRCode(View view) {
@@ -125,12 +137,13 @@ public class AccountFragment extends BaseFragment {
         tvUsernameID.setText(username);
     }
 
-    private void logout(View view) {
+    private void logoutFromServ() {
         EMClient.getInstance().logout(true, new EMCallBack() {
 
             @Override
             public void onSuccess() {
                 uiThread(()->{
+                    Toast.makeText(getContext(),"注销登录成功",Toast.LENGTH_LONG).show();
                     context.startActivity(new Intent(getActivity(),LoginActivity.class));
                     getActivity().finish();
                 });
