@@ -158,7 +158,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
 
         textEdit.setOnEditorActionListener((v, actionId, event) -> {
             hideSoftKeyboard();
-            chatPresenter.sendMessage(userName, textEdit.getText().toString().trim());
+            chatPresenter.sendMessage(userName, textEdit.getText().toString());
             return true;
         });
 
