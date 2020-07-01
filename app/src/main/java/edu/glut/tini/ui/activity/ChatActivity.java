@@ -78,6 +78,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
             chatPresenter.loadMoreMessages(userName);
+
         });
 
 

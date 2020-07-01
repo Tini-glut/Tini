@@ -76,7 +76,6 @@
 
         <activity android:name=".ui.activity.ChatActivity"
             android:parentActivityName=".ui.MainActivity"/> <!-- 设置环信应用的AppKey -->
-        <activity android:name=".ui.activity.ChatActivity" /> <!-- 设置环信应用的AppKey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1115200622203460#tini" /> <!-- 声明SDK所需的service SDK核心功能 -->

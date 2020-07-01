@@ -96,7 +96,10 @@ public class ChatPresenter implements ChatContract.Presenter {
                  else {
                     uiThread(() -> view.onLoadedMoreMessagesFailed(size));
                 }
+            }else{
+                uiThread(() -> view.onLoadedMoreMessagesFailed(0));
             }
+
 
         }).start();
     }

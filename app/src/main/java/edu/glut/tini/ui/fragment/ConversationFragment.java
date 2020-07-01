@@ -62,6 +62,17 @@ public class ConversationFragment extends BaseFragment {
         new Thread(() -> {
             Map<String, EMConversation> allConversations = EMClient.getInstance().chatManager().getAllConversations();
             conversations.addAll((allConversations.values()));
+            conversations.sort((o1, o2) -> {
+                long msgTimeO1 = o1.getLastMessage().getMsgTime();
+                long msgTimeO2 = o2.getLastMessage().getMsgTime();
+                if (msgTimeO1==msgTimeO2){
+                    return 0;
+                }else if(msgTimeO1>msgTimeO2){
+                    return -1;
+                }else {
+                    return 1;
+                }
+            });
            uiThread(() -> {
                recyclerView.getAdapter().notifyDataSetChanged();
            });
