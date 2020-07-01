@@ -1,11 +1,13 @@
 package edu.glut.tini.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.ActionMenuItem;
 import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.widget.SearchView;
@@ -23,6 +26,7 @@ import androidx.preference.PreferenceManager;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.hyphenate.EMCallBack;
@@ -36,6 +40,7 @@ import edu.glut.tini.data.entity.Contacts;
 import edu.glut.tini.presenter.MainPresenter;
 import edu.glut.tini.ui.activity.AddContactActivity;
 import edu.glut.tini.ui.activity.BaseActivity;
+import edu.glut.tini.ui.activity.ColorLensActivity;
 import edu.glut.tini.utils.factory.FragmentFactory;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
@@ -114,10 +119,16 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             case R.id.qr_code_scanner:
                 scanQRCode();
                 return true;
+            case R.id.color_lens:
+                buildColorLensAlertDialog(getApplicationContext());
             default:
                 super.onOptionsItemSelected(item);
         }
         return false;
+    }
+
+    private void buildColorLensAlertDialog(Context context) {
+        startActivity(new Intent(this, ColorLensActivity.class));
     }
 
 
