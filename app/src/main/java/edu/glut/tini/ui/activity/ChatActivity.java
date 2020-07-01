@@ -221,4 +221,10 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
             Toast.makeText(getApplicationContext(),"没有更多消息啦",Toast.LENGTH_SHORT).show();
         });
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EMClient.getInstance().chatManager().getConversation(userName).markAllMessagesAsRead();
+    }
 }

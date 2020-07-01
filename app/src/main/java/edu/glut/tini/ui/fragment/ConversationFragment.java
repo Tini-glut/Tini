@@ -31,16 +31,18 @@ public class ConversationFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private List<EMConversation> conversations = new ArrayList<>();
 
-    private EMMessageListenerAdapter adapter=new EMMessageListenerAdapter(){
-        @Override
-        public void onMessageReceived(List<EMMessage> list) {
-            loadConversations();
-        }
-    };
+    private EMMessageListenerAdapter adapter;
 
     @Override
     protected void init() {
         super.init();
+
+        adapter =new EMMessageListenerAdapter(){
+            @Override
+            public void onMessageReceived(List<EMMessage> list) {
+                loadConversations();
+            }
+        };
         MainActivity.getMaterialToolbar().setTitle(getString(R.string.text_label_conversation));
         recyclerView = mRootView.findViewById(R.id.conversation_recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -50,7 +52,7 @@ public class ConversationFragment extends BaseFragment {
         //监听器
         EMClient.getInstance().chatManager().addMessageListener(adapter);
 
-        loadConversations();
+//        loadConversations();
 
     }
 
@@ -58,9 +60,6 @@ public class ConversationFragment extends BaseFragment {
 
         conversations.clear();
         new Thread(() -> {
-
-            conversations.clear();
-
             Map<String, EMConversation> allConversations = EMClient.getInstance().chatManager().getAllConversations();
             conversations.addAll((allConversations.values()));
            uiThread(() -> {
