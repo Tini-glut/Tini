@@ -158,7 +158,7 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
 
         textEdit.setOnEditorActionListener((v, actionId, event) -> {
             hideSoftKeyboard();
-            chatPresenter.sendMessage(userName, textEdit.getText().toString().trim());
+            chatPresenter.sendMessage(userName, textEdit.getText().toString());
             return true;
         });
 
@@ -220,5 +220,11 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
         runOnUiThread(() -> {
             Toast.makeText(getApplicationContext(),"没有更多消息啦",Toast.LENGTH_SHORT).show();
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EMClient.getInstance().chatManager().getConversation(userName).markAllMessagesAsRead();
     }
 }

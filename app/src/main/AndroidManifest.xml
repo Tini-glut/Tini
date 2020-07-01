@@ -31,10 +31,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.AboutActivity"
-            android:label="@string/about"
+
+        <activity android:name=".ui.activity.SearchableActivity"
+            android:label="@string/text_label_search"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.Setting"
+            />
+
+        <activity android:name=".ui.activity.ColorLensActivity"
+            android:label="@string/color_lens_label"
             android:parentActivityName=".ui.MainActivity"
             android:theme="@style/AppTheme.Setting"/>
+        <activity
+            android:name=".ui.activity.AboutActivity"
+            android:label="@string/about"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.Setting" />
         <activity
             android:name=".ui.activity.SettingsActivity"
             android:label="@string/Setting"
@@ -57,12 +69,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
-
         <activity android:name=".ui.activity.ChatActivity" /> <!-- 设置环信应用的AppKey -->
         <meta-data
             android:name="EASEMOB_APPKEY"

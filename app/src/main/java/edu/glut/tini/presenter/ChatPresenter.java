@@ -60,7 +60,7 @@ public class ChatPresenter implements ChatContract.Presenter {
     @Override
     public void addMessage(String userName, List<EMMessage> list) {
         messages.addAll(list);
-        EMClient.getInstance().chatManager().getConversation(userName).markAllMessagesAsRead();
+//        EMClient.getInstance().chatManager().getConversation(userName).markAllMessagesAsRead();
     }
 
     @Override
@@ -69,13 +69,7 @@ public class ChatPresenter implements ChatContract.Presenter {
             EMConversation conversation = EMClient.getInstance().chatManager().getConversation(userName);
             if (conversation != null) {
                 List<EMMessage> allMessages = conversation.getAllMessages();
-               /* Log.d(this.getMessages().toString(), String.valueOf(allMessages.size()));
-                String msgId = allMessages.get(0).getMsgId();
-                List<EMMessage> list = conversation.loadMoreMsgFromDB(msgId, conversation.getAllMsgCount());
-//                messages.addAll(list);
-                for (int i = 0; i < list.size(); i++) {
-                    messages.add(list.get(i));
-                }*/
+                conversation.markAllMessagesAsRead();
                 messages.addAll(allMessages);
 
             }

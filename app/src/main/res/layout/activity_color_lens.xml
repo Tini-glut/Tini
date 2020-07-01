@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog"
+    android:paddingTop="@dimen/image_avatar"
+    android:divider="@drawable/divider"
+    android:showDividers="middle"
+    tools:context=".ui.activity.ColorLensActivity"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="68dp">
+
+        <ImageView
+            android:id="@+id/ed"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="@dimen/layout_margin"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_card_48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/selector_pick_item"
+            app:backgroundTint="@color/colorPrimary"
+            android:layout_width="wrap_content" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_toEndOf="@+id/ed"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/icon_textview_margin"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:text="红色"/>
+
+        <Button
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/layout_margin"
+            android:layout_centerVertical="true"
+            android:text="使用"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="68dp">
+
+        <ImageView
+            android:id="@+id/theme_blue"
+            android:layout_marginStart="@dimen/layout_margin"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_card_48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/selector_pick_item"
+            app:backgroundTint="@color/blue" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_toEndOf="@+id/theme_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/icon_textview_margin"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:text="蓝色"/>
+
+        <Button
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/layout_margin"
+            android:layout_centerVertical="true"
+            android:text="使用"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="68dp">
+
+        <ImageView
+            android:id="@+id/theme_pink"
+            android:layout_marginStart="@dimen/layout_margin"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_card_48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/selector_pick_item"
+            app:backgroundTint="@color/pink" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_toEndOf="@+id/theme_pink"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/icon_textview_margin"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:text="粉色"/>
+
+        <Button
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/layout_margin"
+            android:layout_centerVertical="true"
+            android:text="使用"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/pink"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"/>
+    </RelativeLayout>
+
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="?attr/dialogPreferredPadding"
+        android:paddingRight="?attr/dialogPreferredPadding"
+        android:paddingTop="?attr/dialogPreferredPadding">
+
+         />
+
+        <androidx.legacy.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/theme_purple"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_card_48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/selector_pick_item"
+            app:backgroundTint="@color/purple" />
+
+        <androidx.legacy.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+
+        <ImageView
+
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_card_48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/selector_pick_item"
+            app:backgroundTint="@color/blue" />
+
+        <androidx.legacy.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/theme_green"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_card_48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/selector_pick_item"
+            app:backgroundTint="@color/green" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="?attr/dialogPreferredPadding"
+        android:paddingRight="?attr/dialogPreferredPadding"
+        android:paddingTop="?attr/dialogPreferredPadding">
+
+        <ImageView
+            android:id="@+id/theme_green_light"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_card_48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/selector_pick_item"
+            app:backgroundTint="@color/green_light" />
+
+        <androidx.legacy.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/theme_yellow"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_card_48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/selector_pick_item"
+            app:backgroundTint="@color/yellow" />
+
+        <androidx.legacy.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/theme_orange"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_card_48dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/selector_pick_item"
+            app:backgroundTint="@color/orange" />
+
+        <androidx.legacy.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible" />-->
+
+</LinearLayout>

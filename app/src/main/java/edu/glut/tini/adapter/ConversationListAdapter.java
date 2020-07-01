@@ -35,9 +35,6 @@ public class ConversationListAdapter extends RecyclerView.Adapter<RecyclerView.V
         conversationListItemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChatActivity.class);
             String username = conversations.get(position).conversationId();
-
-            EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
-            conversation.markAllMessagesAsRead();
             intent.putExtra("userName", username);
             context.startActivity(intent);
         });
