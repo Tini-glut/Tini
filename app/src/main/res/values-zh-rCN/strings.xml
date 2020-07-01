@@ -36,6 +36,7 @@
     <string name="select_manually_title">手动选择</string>
     <string name="dark_mode_summary">开启后，将跟随系统打开或关闭深色模式</string>
     <string name="text_label_search">搜索</string>
+    <string name="text_label_search_res">搜索结果</string>
     <string name="text_label_more">更多</string>
     <string name="text_label_add_contacts">添加好友</string>
     <string name="text_label_add_from_photo">扫一扫</string>

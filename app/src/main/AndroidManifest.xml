@@ -31,6 +31,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <activity android:name=".ui.activity.SearchableActivity"
+            android:label="@string/text_label_search"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.Setting"
+            />
+
         <activity android:name=".ui.activity.ColorLensActivity"
             android:label="@string/color_lens_label"
             android:parentActivityName=".ui.MainActivity"

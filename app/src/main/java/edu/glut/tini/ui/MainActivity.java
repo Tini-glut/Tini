@@ -2,37 +2,29 @@ package edu.glut.tini.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.menu.ActionMenuItem;
-import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.PreferenceManager;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import edu.glut.tini.R;
 import edu.glut.tini.contract.MainContract;
@@ -41,6 +33,7 @@ import edu.glut.tini.presenter.MainPresenter;
 import edu.glut.tini.ui.activity.AddContactActivity;
 import edu.glut.tini.ui.activity.BaseActivity;
 import edu.glut.tini.ui.activity.ColorLensActivity;
+import edu.glut.tini.ui.activity.SearchableActivity;
 import edu.glut.tini.utils.factory.FragmentFactory;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
@@ -64,15 +57,16 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         materialToolbar = findViewById(R.id.header_toolbar);
         bottomNavigationView = findViewById(R.id.tab_bottom_bar);
         bottomNavigationView.setSelectedItemId(R.id.page_message);
+        AtomicReference<FragmentTransaction> beginTransaction = new AtomicReference<>(getSupportFragmentManager().beginTransaction());
+        beginTransaction.get().replace(R.id.home_body,FragmentFactory.getInstance(R.id.page_message)).commit();
         mainPresenter = new MainPresenter(this,getApplicationContext());
-
         materialToolbar.setTitle(getString(R.string.text_label_conversation));
         setSupportActionBar(materialToolbar);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             //获取FragmentTransaction，并且开启事务。
-            FragmentTransaction beginTransaction = getSupportFragmentManager().beginTransaction();
-            beginTransaction.replace(R.id.home_body,FragmentFactory.getInstance(item.getItemId()));
-            beginTransaction.commit();
+            beginTransaction.set(getSupportFragmentManager().beginTransaction());
+            beginTransaction.get().replace(R.id.home_body,FragmentFactory.getInstance(item.getItemId()));
+            beginTransaction.get().commit();
             return true;
         });
 
@@ -94,7 +88,15 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 List<Contacts> data  = mainPresenter.search(query);
-
+                if (data.size() == 0) {
+                    runOnUiThread(()->{
+                        Toast.makeText(getApplicationContext(),"没有联系人哦！",Toast.LENGTH_LONG).show();
+                    });
+                    return true;
+                }
+                Intent search = new Intent(getApplicationContext(),SearchableActivity.class);
+                search.putExtra("searchData", (Serializable) data);
+                startActivity(search);
                 searchView.clearFocus();
                 return true;
             }
