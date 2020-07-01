@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import edu.glut.tini.R;
 import edu.glut.tini.utils.StatusBarUtils;
 
@@ -25,7 +23,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResourceId());
-        StatusBarUtils.setColor(this, getResources().getColor(R.color.colorPrimary));
         init();
     }
 
@@ -47,6 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 这个方法用于初始化一些公共的功能，子类可以重写。
      * */
     public void init() {
+        StatusBarUtils.setColor(this, getResources().getColor(R.color.colorPrimary));
         manager =
                 (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
     }
