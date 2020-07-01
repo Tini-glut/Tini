@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 
 import java.util.List;
@@ -225,6 +226,10 @@ public class ChatActivity extends BaseActivity implements ChatContract.View {
     @Override
     protected void onPause() {
         super.onPause();
-        EMClient.getInstance().chatManager().getConversation(userName).markAllMessagesAsRead();
+
+        EMConversation conversation = EMClient.getInstance().chatManager().getConversation(userName);
+        if (conversation != null) {
+            conversation.markAllMessagesAsRead();
+        }
     }
 }
