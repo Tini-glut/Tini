@@ -158,10 +158,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.top_app_bar, menu);
-        MenuItem searchItem = menu.findItem(R.id.search);
         menuInflater.inflate(R.menu.top_app_bar,menu);
-        MenuItem searchItem =  menu.findItem(R.id.search);
+        MenuItem searchItem = menu.findItem(R.id.search);
+
         MenuItem darkItem = menu.findItem(R.id.dark_mode);
         MenuItem lightItem = menu.findItem(R.id.light_mode);
         //获取当前是否是夜间模式

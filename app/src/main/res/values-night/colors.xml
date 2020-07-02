@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
-    <color name="colorPrimaryDark">#3F3F3F</color>
-    <color name="colorPrimaryLight">#121212</color>
-    <color name="colorAccent">@color/blue_trans</color>
-    <color name="primary_text">#BDBDBE</color>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryLight">@color/blue_trans</color>
+    <color name="colorAccent">#303030</color>
+    <color name="primary_text">#000000</color>
     <color name="first_letter">#3F3F3F</color>
-    <color name="bg_nva">#3F3F3F</color>
-    <color name="chat_line">#BDBDBE</color>
+    <color name="bg_nva">#424242</color>
+    <color name="chat_line">#424242</color>
 </resources>

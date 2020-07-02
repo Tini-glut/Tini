@@ -33,13 +33,6 @@
             app:defaultValue="true"
             app:key="@string/dark_mode_key"
             app:title="@string/dark_mode_auto" />
-
-        <ListPreference
-            app:entries="@array/dark_entries"
-            app:entryValues="@array/dark_values"
-            app:key="@string/dark_mode_select_key"
-            app:title="@string/select_manually_title"
-            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <PreferenceCategory app:title="@string/messages_header">
         <SwitchPreferenceCompat
