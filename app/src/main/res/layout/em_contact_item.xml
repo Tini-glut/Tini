@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <TextView
             android:id="@+id/firstLetter"
             android:layout_width="match_parent"
@@ -18,9 +17,8 @@
             android:paddingStart="@dimen/padding"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            tools:text="A"
-            android:textAllCaps="true" />
-
+            android:textAllCaps="true"
+            tools:text="A" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -31,34 +29,44 @@
             android:foregroundGravity="clip_horizontal"
             >
 
-        <LinearLayout
-            android:background="?android:attr/selectableItemBackground"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:focusable="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:focusable="true"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="@dimen/image_avatar"
-                android:layout_height="@dimen/image_avatar"
-                android:paddingStart="@dimen/padding"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:src="@mipmap/ic_launcher_round"/>
+                <ImageView
+                    android:id="@+id/friends_avatar"
+                    android:layout_width="@dimen/image_avatar"
+                    android:layout_height="@dimen/image_avatar"
+                    android:paddingStart="@dimen/padding"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:src="@mipmap/ic_launcher_round" />
+
+                <TextView
+                    android:id="@+id/userName"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/icon_textview_margin"
+                    android:textSize="@dimen/input_label"
+                    tools:text="Admin" />
+
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/userName"
+                android:id="@+id/friends_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/icon_textview_margin"
-                android:textSize="@dimen/input_label"
-                style="@style/TextAppearance.AppCompat.Body2"
-                tools:text="Admin" />
-
-
-        </LinearLayout>
-
+                android:text="friends_count"
+                android:textColor="#BDBDBD"
+                android:layout_gravity="center"
+                android:visibility="invisible"
+                />
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>

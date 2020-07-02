@@ -71,7 +71,7 @@ public class ChatPresenter implements ChatContract.Presenter {
                 List<EMMessage> allMessages = conversation.getAllMessages();
                 conversation.markAllMessagesAsRead();
                 messages.addAll(allMessages);
-
+                conversation.setExtField("");
             }
             uiThread(() -> {
                 view.onLoadedMessages();
@@ -96,7 +96,10 @@ public class ChatPresenter implements ChatContract.Presenter {
                  else {
                     uiThread(() -> view.onLoadedMoreMessagesFailed(size));
                 }
+            }else{
+                uiThread(() -> view.onLoadedMoreMessagesFailed(0));
             }
+
 
         }).start();
     }
