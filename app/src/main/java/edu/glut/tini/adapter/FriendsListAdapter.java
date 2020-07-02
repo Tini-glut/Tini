@@ -1,9 +1,9 @@
 package edu.glut.tini.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.adapter.EMAChatClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +28,6 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private Context context;
     private List<FriendsListItem> friendsListItems = new ArrayList<>();
-
-    public FriendsListAdapter(Context context) {
-        this.context = context;
-    }
-
-    public FriendsListAdapter(List<FriendsListItem> friendsListItems) {
-        this.friendsListItems = friendsListItems;
-    }
 
     public FriendsListAdapter(Context context, List<FriendsListItem> friendsListItems) {
         this.context = context;
@@ -52,7 +43,14 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         FriendsListItemView friendsListItemView = (FriendsListItemView) holder.itemView;
-        friendsListItemView.bindView(friendsListItems.get(position));
+        if (position < friendsListItems.size()){
+            friendsListItemView.bindView(friendsListItems.get(position));
+        }else if (position==friendsListItems.size()){
+                friendsListItemView.bindViewOfFriendsCount(friendsListItems.size());
+                return ;
+        }
+
+
         //短按事件
         friendsListItemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ChatActivity.class);
@@ -64,8 +62,8 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context);
             builder.setTitle("删除好友")
                     .setMessage("你确定要删除此好友吗")
-                    .setNegativeButton(context.getString(R.string.cancel),null)
-                    .setPositiveButton(context.getString(android.R.string.yes),(dialog, which) -> {
+                    .setNegativeButton(context.getString(R.string.cancel), null)
+                    .setPositiveButton(context.getString(android.R.string.yes), (dialog, which) -> {
                         delFriend(friendsListItems.get(position).getUserName());
                     });
             builder.show();
@@ -82,14 +80,14 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             @Override
             public void onSuccess() {
                 Looper.prepare();
-                Toast.makeText(context,"删除成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show();
                 Looper.loop();
             }
 
             @Override
             public void onError(int i, String s) {
                 Looper.prepare();
-                Toast.makeText(context,"删除失败",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "删除失败", Toast.LENGTH_SHORT).show();
                 Looper.loop();
             }
 
@@ -102,7 +100,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemCount() {
-        return friendsListItems.size();
+        return (friendsListItems.size() + 1);
     }
 
 
@@ -115,6 +113,6 @@ public class FriendsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public long getItemId(int position) {
-        return  position;
+        return position;
     }
 }
