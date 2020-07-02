@@ -8,6 +8,8 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
@@ -31,14 +33,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                style="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="@dimen/input_label"
+                style="@style/TextAppearance.AppCompat.Body2"
                 android:layout_margin="@dimen/margin"
                 tools:text="Admin" />
             <TextView
                 android:id="@+id/list_label_username_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/margin"
                 tools:text="2019-2-4"
@@ -57,7 +59,7 @@
             android:textColor="@color/divider"
             tools:text="17:47"
             android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin"
             />
 
         <TextView
