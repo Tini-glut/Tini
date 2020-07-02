@@ -52,7 +52,7 @@ public class ConversationListAdapter extends RecyclerView.Adapter<RecyclerView.V
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case R.id.delete_conversation:
-                        EMClient.getInstance().chatManager().deleteConversation(conversations.get(position).conversationId(), false);
+                        conversations.get(position).setExtField("deleted");
                         conversations.remove(conversations.get(position));
                         notifyDataSetChanged();
                         break;
@@ -62,7 +62,7 @@ public class ConversationListAdapter extends RecyclerView.Adapter<RecyclerView.V
                                 .setMessage("删除后，聊天记录将会被清空!")
                                 .setNegativeButton(context.getString(R.string.cancel),null)
                                 .setPositiveButton(context.getString(android.R.string.yes),(dialog, which) -> {
-                                    EMClient.getInstance().chatManager().deleteConversation(conversations.get(position).conversationId(), false);
+                                    EMClient.getInstance().chatManager().deleteConversation(conversations.get(position).conversationId(), true);
                                     conversations.remove(conversations.get(position));
                                     notifyDataSetChanged();
                                 });

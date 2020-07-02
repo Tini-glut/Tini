@@ -73,6 +73,11 @@ public class ConversationFragment extends BaseFragment {
                     return 1;
                 }
             });
+            for (int i = 0; i < conversations.size(); i++) {
+                if (conversations.get(i).getExtField().equals("deleted")){
+                    conversations.remove(i);
+                }
+            }
            uiThread(() -> {
                recyclerView.getAdapter().notifyDataSetChanged();
            });
