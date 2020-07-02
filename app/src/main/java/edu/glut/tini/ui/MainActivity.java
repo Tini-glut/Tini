@@ -107,7 +107,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         MenuItem lightItem = menu.findItem(R.id.light_mode);
         //获取当前是否是夜间模式
         new Thread(()-> {
-            int localNightMode = getDelegate().getLocalNightMode();
+            int localNightMode = AppCompatDelegate.getDefaultNightMode();
             if (localNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
                 //显示切换日间模式
                 lightItem.setVisible(true);

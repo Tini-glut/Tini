@@ -61,10 +61,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void switchLightMode() {
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     public void switchDarkMode() {
-        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 }
