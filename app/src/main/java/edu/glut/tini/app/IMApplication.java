@@ -41,7 +41,7 @@ import edu.glut.tini.ui.activity.ChatActivity;
 public class IMApplication extends Application {
     private static final String TAG = "IMApplication";
     private static final String key = "60f184af6b1abc4ae4a4b03565f1af10";
-    private static final int CHANNEL_ID = 1234567;
+    private static final String CHANNEL_ID = "edu.glut.tini";
     public static boolean AUTOLOGIN = true;
 
     /**
@@ -62,6 +62,8 @@ public class IMApplication extends Application {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         //AUTOLOGIN = preferences.getBoolean(getString(R.string.auto_login_key),true);
         manager =  (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//         manager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+
         // 默认添加好友时，是不需要验证的，改成需要验证
         options.setAcceptInvitationAlways(false);
         // 是否自动将消息附件上传到环信服务器，默认为True是使用环信服务器上传下载，如果设为 false，需要开发者自己处理附件消息的上传和下载
@@ -88,7 +90,9 @@ public class IMApplication extends Application {
                 //判断是否前台
                 if (isForgeground()) {
                     playAudio();
+//                    Log.d(TAG, "onMessageReceived: 前台");
                 } else {
+//                    Log.d(TAG, "onMessageReceived: 后台");
                     playAudio();
                     showNotification(list);
                 }
@@ -102,6 +106,7 @@ public class IMApplication extends Application {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void showNotification(List<EMMessage> list) {
 //        Log.d(TAG, "showNotification: 未读消息数量 "+list.size());
+
         for (EMMessage emMessage : list) {
             EMTextMessageBody body = (EMTextMessageBody) emMessage.getBody();
             String message = body.getMessage();
@@ -117,11 +122,10 @@ public class IMApplication extends Application {
             PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
-
-            Notification notification = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID + "")
+            Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setContentTitle(fromWho)
                     .setContentText(message)
-                    .setWhen(System.currentTimeMillis())
+                    .setWhen(emMessage.getMsgTime())
                     .setSmallIcon(R.mipmap.ic_launcher_round)
                     .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
                     .setContentIntent(pendingIntent)
@@ -137,7 +141,7 @@ public class IMApplication extends Application {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @NotNull
     private NotificationChannel getNotificationChannel() {
-        NotificationChannel notificationChannel = new NotificationChannel("007", "123", NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, "普通消息", NotificationManager.IMPORTANCE_DEFAULT);
         notificationChannel.setDescription("description");
         notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
         notificationChannel.enableLights(true);
@@ -175,7 +179,7 @@ public class IMApplication extends Application {
             }
         });
         if (mSoundId == DEFAULT_INVALID_SOUND_ID) {
-            mSoundId = mSoundPool.load(getApplicationContext(), R.raw.general, 1/*0*/);
+            mSoundId = mSoundPool.load(this, R.raw.general, 1/*0*/);
         } else {
             if (mStreamId == DEFAULT_INVALID_SOUND_ID)
                 onLoadComplete(mSoundPool, 0, 0);
