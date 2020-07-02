@@ -7,6 +7,7 @@
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
+    <color name="bg_nva">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
     <color name="bottom_blue">#2196F3</color>
     <color name="white">#FFFFFF</color>

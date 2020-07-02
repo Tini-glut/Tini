@@ -7,6 +7,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import edu.glut.tini.R;
 import edu.glut.tini.utils.StatusBarUtils;
 
@@ -56,5 +58,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void hideProgressBar() {
         bar.setVisibility(View.INVISIBLE);
+    }
+
+    public void switchLightMode() {
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    }
+
+    public void switchDarkMode() {
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 }

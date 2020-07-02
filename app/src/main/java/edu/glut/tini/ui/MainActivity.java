@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentTransaction;
@@ -102,6 +103,17 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.top_app_bar,menu);
         MenuItem searchItem =  menu.findItem(R.id.search);
+        MenuItem darkItem = menu.findItem(R.id.dark_mode);
+        MenuItem lightItem = menu.findItem(R.id.light_mode);
+        //获取当前是否是夜间模式
+        new Thread(()-> {
+            int localNightMode = getDelegate().getLocalNightMode();
+            if (localNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+                //显示切换日间模式
+                lightItem.setVisible(true);
+            } else darkItem.setVisible(true);
+        }).start();
+
         searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         searchView.setQueryHint(getString(R.string.query_hint_label));
@@ -148,11 +160,20 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 return true;
             case R.id.color_lens:
                 buildColorLensAlertDialog(getApplicationContext());
+                return true;
+            case R.id.dark_mode:
+                switchDarkMode();
+                return true;
+            case R.id.light_mode:
+                switchLightMode();
+                return true;
             default:
                 super.onOptionsItemSelected(item);
         }
         return false;
     }
+
+
 
     private void buildColorLensAlertDialog(Context context) {
         startActivity(new Intent(this, ColorLensActivity.class));

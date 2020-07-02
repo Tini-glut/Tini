@@ -28,6 +28,18 @@
                 android:icon="@drawable/baseline_color_lens_black_24"
                 android:title="@string/color_lens_label"
                 app:showAsAction="always"/>
+            <item
+                android:id="@+id/dark_mode"
+                android:icon="@drawable/baseline_brightness_4_black_24"
+                android:title="@string/dark_header"
+                android:visible="false"
+                app:showAsAction="always"/>
+            <item
+                android:id="@+id/light_mode"
+                android:icon="@drawable/baseline_brightness_5_black_24"
+                android:title="@string/light_header"
+                android:visible="false"
+                app:showAsAction="always"/>
         </menu>
 
     </item>
