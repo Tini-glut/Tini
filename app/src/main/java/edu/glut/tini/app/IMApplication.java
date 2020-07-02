@@ -1,5 +1,6 @@
 package edu.glut.tini.app;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.app.Notification;
@@ -15,12 +16,16 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
 import androidx.preference.PreferenceManager;
+
 
 
 import com.hyphenate.chat.EMClient;
@@ -36,6 +41,7 @@ import java.util.List;
 import cn.bmob.v3.Bmob;
 import edu.glut.tini.R;
 import edu.glut.tini.adapter.EMMessageListenerAdapter;
+import edu.glut.tini.ui.activity.BaseActivity;
 import edu.glut.tini.ui.activity.ChatActivity;
 
 public class IMApplication extends Application {
@@ -43,6 +49,10 @@ public class IMApplication extends Application {
     private static final String key = "60f184af6b1abc4ae4a4b03565f1af10";
     private static final String CHANNEL_ID = "edu.glut.tini";
     public static boolean AUTOLOGIN = true;
+
+    private static IMApplication mApp;
+    private Activity sActivity;
+
 
     /**
      * 新信息通知播放通知声音
@@ -61,7 +71,7 @@ public class IMApplication extends Application {
         EMOptions options = new EMOptions();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         //AUTOLOGIN = preferences.getBoolean(getString(R.string.auto_login_key),true);
-        manager =  (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 //         manager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
         // 默认添加好友时，是不需要验证的，改成需要验证
@@ -82,7 +92,9 @@ public class IMApplication extends Application {
 
         Bmob.initialize(IMApplication.this, key);
 
-
+        /**
+         * 通知提示音
+         */
         EMClient.getInstance().chatManager().addMessageListener(new EMMessageListenerAdapter() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -100,7 +112,48 @@ public class IMApplication extends Application {
             }
         });
 
+        mApp = this;
+        this.registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+                Log.d("YWK", activity + "onActivityCreated");
 
+            }
+
+            @Override
+            public void onActivityStarted(@NonNull Activity activity) {
+                Log.d("YWK", activity + "onActivityStarted");
+                if (activity instanceof BaseActivity) {
+                    sActivity = (BaseActivity)activity;
+
+                }
+            }
+
+            @Override
+            public void onActivityResumed(@NonNull Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityPaused(@NonNull Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityStopped(@NonNull Activity activity) {
+
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(@NonNull Activity activity) {
+
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -154,12 +207,12 @@ public class IMApplication extends Application {
 
     /**
      * 判断是否前台
+     *
      * @return
      */
     private boolean isForgeground() {
         ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = activityManager.getRunningAppProcesses();
-
         for (ActivityManager.RunningAppProcessInfo runningAppProcess : runningAppProcesses) {
             if (runningAppProcess.processName.equals(this.getPackageName())) {
                 return runningAppProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
@@ -244,5 +297,13 @@ public class IMApplication extends Application {
             mSoundPool.release();
             mSoundPool = null;
         }
+    }
+
+    public static IMApplication getInstance() {
+        return mApp;
+    }
+
+    public Activity getTopActivity() {
+        return sActivity;
     }
 }
