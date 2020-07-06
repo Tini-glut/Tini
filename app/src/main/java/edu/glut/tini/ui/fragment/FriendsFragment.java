@@ -89,7 +89,7 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
         recyclerView = mRootView.findViewById(R.id.recyclerView);
         slideBar = mRootView.findViewById(R.id.slideBar);
         slideBar_letter = mRootView.findViewById(R.id.letter);
-        swipeRefreshLayout.setColorSchemeResources(R.color.swipe_refresh);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
         //下拉刷新联系人列表
         swipeRefreshLayout.setOnRefreshListener(() -> friendsPresenter.loadFriends());
@@ -109,7 +109,7 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
             public void onTouchLetterChange(String letter) {
                 slideBar_letter.setVisibility(View.VISIBLE);
                 slideBar_letter.setText(letter);
-                recyclerView.smoothScrollToPosition(getPosition(letter));
+                recyclerView.scrollToPosition(getPosition(letter));
             }
 
             @Override
