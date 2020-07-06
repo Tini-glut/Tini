@@ -109,7 +109,7 @@ public class FriendsFragment extends BaseFragment implements FriendsContract.Vie
             public void onTouchLetterChange(String letter) {
                 slideBar_letter.setVisibility(View.VISIBLE);
                 slideBar_letter.setText(letter);
-                recyclerView.smoothScrollToPosition(getPosition(letter));
+                recyclerView.scrollToPosition(getPosition(letter));
             }
 
             @Override
