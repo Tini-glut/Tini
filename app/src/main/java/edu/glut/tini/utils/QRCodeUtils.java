@@ -50,9 +50,14 @@ public class QRCodeUtils {
      * @return
      */
     @Nullable
-    public static Bitmap createQRCodeBitmap(String content, int width, int height,
-                                            @Nullable String character_set, @Nullable String error_correction, @Nullable String margin,
-                                            @ColorInt int color_black, @ColorInt int color_white){
+    public static Bitmap createQRCodeBitmap(String content,
+                                            int width,
+                                            int height,
+                                            @Nullable String character_set,
+                                            @Nullable String error_correction,
+                                            @Nullable String margin,
+                                            @ColorInt int color_black,
+                                            @ColorInt int color_white){
 
         /** 1.参数合法性判断 */
         if(TextUtils.isEmpty(content)){ // 字符串内容判空
