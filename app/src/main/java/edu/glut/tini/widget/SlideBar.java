@@ -1,5 +1,6 @@
 package edu.glut.tini.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import edu.glut.tini.R;
 
 
 public class SlideBar extends View {
@@ -54,6 +57,7 @@ public class SlideBar extends View {
         paint.setAntiAlias(true);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -69,7 +73,7 @@ public class SlideBar extends View {
         for (int i = 0; i < LETTERS.length; i++) {
             initPaint();
             if (i==index){
-                paint.setColor(Color.RED);
+                paint.setColor(R.color.colorPrimary);
             }
             canvas.drawText(LETTERS[i], x, y, paint);
             y+=letterHeight;
