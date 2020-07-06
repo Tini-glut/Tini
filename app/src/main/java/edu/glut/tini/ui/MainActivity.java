@@ -1,9 +1,11 @@
 package edu.glut.tini.ui;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
@@ -23,9 +26,12 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.hyphenate.EMCallBack;
+import com.hyphenate.EMConnectionListener;
+import com.hyphenate.EMError;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
@@ -36,12 +42,14 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import edu.glut.tini.R;
 import edu.glut.tini.adapter.EMMessageListenerAdapter;
+import edu.glut.tini.app.IMApplication;
 import edu.glut.tini.contract.MainContract;
 import edu.glut.tini.data.entity.Contacts;
 import edu.glut.tini.presenter.MainPresenter;
 import edu.glut.tini.ui.activity.AddContactActivity;
 import edu.glut.tini.ui.activity.BaseActivity;
 import edu.glut.tini.ui.activity.ColorLensActivity;
+import edu.glut.tini.ui.activity.LoginActivity;
 import edu.glut.tini.ui.activity.SearchableActivity;
 import edu.glut.tini.utils.factory.FragmentFactory;
 
@@ -51,6 +59,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private SearchView searchView;
     private MainContract.Presenter mainPresenter;
     private TextView count;
+
     public TextView getCount() {
         return count;
     }
@@ -78,10 +87,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         count = findViewById(R.id.message_count);
 
 
-
         AtomicReference<FragmentTransaction> beginTransaction = new AtomicReference<>(getSupportFragmentManager().beginTransaction());
-        beginTransaction.get().replace(R.id.home_body,FragmentFactory.getInstance(R.id.page_message)).commit();
-        mainPresenter = new MainPresenter(this,getApplicationContext());
+        beginTransaction.get().replace(R.id.home_body, FragmentFactory.getInstance(R.id.page_message)).commit();
+        mainPresenter = new MainPresenter(this, getApplicationContext());
         materialToolbar.setTitle(getString(R.string.text_label_conversation));
         setSupportActionBar(materialToolbar);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
@@ -92,9 +100,58 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 count.setVisibility(View.VISIBLE);
             } else if (item.getItemId() == R.id.page_message) count.setVisibility(View.INVISIBLE);
             beginTransaction.set(getSupportFragmentManager().beginTransaction());
-            beginTransaction.get().replace(R.id.home_body,FragmentFactory.getInstance(item.getItemId()));
+            beginTransaction.get().replace(R.id.home_body, FragmentFactory.getInstance(item.getItemId()));
             beginTransaction.get().commit();
             return true;
+        });
+
+        EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
+            @Override
+            public void onConnected() {
+
+            }
+
+            @Override
+            public void onDisconnected(int i) {
+                if (i == EMError.USER_LOGIN_ANOTHER_DEVICE) {
+                    showLoginError();
+                }
+            }
+        });
+
+        if (!EMClient.getInstance().isConnected()) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.putExtra("USER_LOGIN_ANOTHER_DEVICE",true);
+            getApplicationContext().startActivity(intent);
+        }
+    }
+
+    private void showLoginError() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        boolean user_login_another_device = getIntent().getBooleanExtra("USER_LOGIN_ANOTHER_DEVICE", false);
+        Log.d("TAG", "isUSER_LOGIN_ANOTHER_DEVICE: " + user_login_another_device);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(IMApplication.getInstance().getTopActivity());
+        builder.setTitle("下线通知");
+        builder.setMessage("您的账号已在别处登录");
+        builder.setCancelable(false);
+        builder.setPositiveButton("退出", (dialog, which) -> {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("USER_LOGIN_ANOTHER_DEVICE", true);
+            getApplicationContext().startActivity(intent);
+        });
+        builder.setNegativeButton("重新登录", (dialog, which) -> {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            intent.putExtra("USER_LOGIN_ANOTHER_DEVICE", true);
+            getApplicationContext().startActivity(intent);
+
+        });
+
+
+        runOnUiThread(() -> {
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         });
     }
 
@@ -102,7 +159,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.top_app_bar,menu);
-        MenuItem searchItem =  menu.findItem(R.id.search);
+        MenuItem searchItem = menu.findItem(R.id.search);
+
         MenuItem darkItem = menu.findItem(R.id.dark_mode);
         MenuItem lightItem = menu.findItem(R.id.light_mode);
         //获取当前是否是夜间模式
@@ -124,14 +182,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                List<Contacts> data  = mainPresenter.search(query);
+                List<Contacts> data = mainPresenter.search(query);
                 if (data.size() == 0) {
-                    runOnUiThread(()->{
-                        Toast.makeText(getApplicationContext(),"没有联系人哦！",Toast.LENGTH_LONG).show();
+                    runOnUiThread(() -> {
+                        Toast.makeText(getApplicationContext(), "没有联系人哦！", Toast.LENGTH_LONG).show();
                     });
                     return true;
                 }
-                Intent search = new Intent(getApplicationContext(),SearchableActivity.class);
+                Intent search = new Intent(getApplicationContext(), SearchableActivity.class);
                 search.putExtra("searchData", (Serializable) data);
                 startActivity(search);
                 searchView.clearFocus();
@@ -211,15 +269,15 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                         .aysncAddContact(toAddUsername, null, new EMCallBack() {
                             @Override
                             public void onSuccess() {
-                                handler.post(()->{
-                                    Toast.makeText(getApplicationContext(),"已发送好友请求给"+toAddUsername,Toast.LENGTH_LONG).show();
+                                handler.post(() -> {
+                                    Toast.makeText(getApplicationContext(), "已发送好友请求给" + toAddUsername, Toast.LENGTH_LONG).show();
                                 });
                             }
 
                             @Override
                             public void onError(int i, String s) {
-                                handler.post(()->{
-                                    Toast.makeText(getApplicationContext(),"发送好友请求失败",Toast.LENGTH_LONG).show();
+                                handler.post(() -> {
+                                    Toast.makeText(getApplicationContext(), "发送好友请求失败", Toast.LENGTH_LONG).show();
                                 });
                             }
 
