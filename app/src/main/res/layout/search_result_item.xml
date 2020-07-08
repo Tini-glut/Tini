@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/Theme.AppCompat.DayNight"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:elevation="@dimen/card_elevation"
+    android:layout_margin="@dimen/margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/search_avatar"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/image_avatar"
+            android:layout_height="@dimen/image_avatar"
+            android:layout_margin="@dimen/margin"
+            android:src="@mipmap/logo"/>
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/search_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/image_avatar"
+            android:layout_margin="@dimen/margin"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/search_list_label_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/input_label"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_margin="@dimen/margin"
+                tools:text="Admin" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="56dp"
     android:orientation="vertical"
     tools:context=".ui.activity.SearchableActivity"
     android:layout_height="match_parent">
 
-    <ListView
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_result"
         android:layout_weight="1"
         android:layout_width="match_parent"

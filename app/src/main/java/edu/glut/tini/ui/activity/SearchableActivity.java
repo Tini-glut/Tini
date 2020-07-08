@@ -19,6 +19,7 @@ import java.util.List;
 
 import edu.glut.tini.R;
 import edu.glut.tini.adapter.FriendsListAdapter;
+import edu.glut.tini.adapter.SearchResultItemAdapter;
 import edu.glut.tini.data.entity.Contacts;
 import edu.glut.tini.data.item.FriendsListItem;
 import edu.glut.tini.presenter.FriendsPresenter;
@@ -33,7 +34,7 @@ import edu.glut.tini.ui.fragment.FriendsFragment;
  **/
 public class SearchableActivity extends BaseActivity {
 
-    private ListView listView;
+    private RecyclerView listView;
 
     @Override
     public void init() {
@@ -41,6 +42,9 @@ public class SearchableActivity extends BaseActivity {
         listView = findViewById(R.id.search_result);
         Bundle search = getIntent().getExtras();
         List<Contacts> searchData = (List<Contacts>) search.getSerializable("searchData");
+        listView.setHasFixedSize(true);
+        listView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        listView.setAdapter(new SearchResultItemAdapter(getApplicationContext(),searchData));
     }
 
     @Override
